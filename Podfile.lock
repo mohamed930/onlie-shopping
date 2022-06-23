@@ -1,4 +1,7 @@
 PODS:
+  - Apollo (0.51.2):
+    - Apollo/Core (= 0.51.2)
+  - Apollo/Core (0.51.2)
   - Kingfisher (6.3.1)
   - Realm (10.14.0):
     - Realm/Headers (= 10.14.0)
@@ -16,6 +19,7 @@ PODS:
   - RxSwift (6.2.0)
 
 DEPENDENCIES:
+  - Apollo
   - Kingfisher
   - RealmSwift
   - RxCocoa
@@ -24,6 +28,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Apollo
     - Kingfisher
     - Realm
     - RealmSwift
@@ -33,6 +38,7 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
+  Apollo: e5bc805c3f3556c18edc4eae4e2ea4723cea2318
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   Realm: 95a120db10fa66d0f1d10bee4ce828177ae00090
   RealmSwift: 4937e1b6f9b87bc25dc23883198807bf69e8cb76
@@ -41,6 +47,6 @@ SPEC CHECKSUMS:
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
 
-PODFILE CHECKSUM: 98a845f8846618d185e93fbf09802ce1511fc8c9
+PODFILE CHECKSUM: 846848d330aabf19041514a7c8a04d5258fe595a
 
 COCOAPODS: 1.10.1
