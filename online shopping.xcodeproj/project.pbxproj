@@ -3,27 +3,85 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1B15312048D9A2674B84BEF /* Pods_online_shopping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */; };
 		D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */; };
-		D3B1DA6E28649DBE0001FE35 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6D28649DBE0001FE35 /* SceneDelegate.swift */; };
-		D3B1DA7028649DBE0001FE35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6F28649DBE0001FE35 /* ViewController.swift */; };
-		D3B1DA7328649DBE0001FE35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7128649DBE0001FE35 /* Main.storyboard */; };
+		D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */; };
+		D3B1DA7328649DBE0001FE35 /* products.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7128649DBE0001FE35 /* products.storyboard */; };
 		D3B1DA7528649DC10001FE35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7428649DC10001FE35 /* Assets.xcassets */; };
 		D3B1DA7828649DC10001FE35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7628649DC10001FE35 /* LaunchScreen.storyboard */; };
+		D3B1DA9D2864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA862864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf */; };
+		D3B1DA9E2864ACBE0001FE35 /* Raleway-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA882864ACBE0001FE35 /* Raleway-BoldItalic.ttf */; };
+		D3B1DA9F2864ACBE0001FE35 /* Raleway-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA892864ACBE0001FE35 /* Raleway-MediumItalic.ttf */; };
+		D3B1DAA02864ACBE0001FE35 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8A2864ACBE0001FE35 /* Raleway-ThinItalic.ttf */; };
+		D3B1DAA12864ACBE0001FE35 /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8B2864ACBE0001FE35 /* Raleway-ExtraLight.ttf */; };
+		D3B1DAA22864ACBE0001FE35 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8C2864ACBE0001FE35 /* Raleway-Medium.ttf */; };
+		D3B1DAA32864ACBE0001FE35 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8D2864ACBE0001FE35 /* Raleway-SemiBold.ttf */; };
+		D3B1DAA42864ACBE0001FE35 /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8E2864ACBE0001FE35 /* Raleway-ExtraBold.ttf */; };
+		D3B1DAA52864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA8F2864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf */; };
+		D3B1DAA62864ACBE0001FE35 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA902864ACBE0001FE35 /* Raleway-Regular.ttf */; };
+		D3B1DAA72864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA912864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf */; };
+		D3B1DAA82864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA922864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf */; };
+		D3B1DAA92864ACBE0001FE35 /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA932864ACBE0001FE35 /* Raleway-Light.ttf */; };
+		D3B1DAAA2864ACBE0001FE35 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA942864ACBE0001FE35 /* Raleway-Black.ttf */; };
+		D3B1DAAB2864ACBE0001FE35 /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA952864ACBE0001FE35 /* Raleway-BlackItalic.ttf */; };
+		D3B1DAAC2864ACBE0001FE35 /* Raleway-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA962864ACBE0001FE35 /* Raleway-LightItalic.ttf */; };
+		D3B1DAAD2864ACBE0001FE35 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA972864ACBE0001FE35 /* Raleway-Thin.ttf */; };
+		D3B1DAAE2864ACBE0001FE35 /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA982864ACBE0001FE35 /* Raleway-Italic.ttf */; };
+		D3B1DAAF2864ACBE0001FE35 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA992864ACBE0001FE35 /* Raleway-Bold.ttf */; };
+		D3B1DAB02864ACBE0001FE35 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA9A2864ACBE0001FE35 /* OFL.txt */; };
+		D3B1DAB12864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA9B2864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf */; };
+		D3B1DAB22864ACBE0001FE35 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA9C2864ACBE0001FE35 /* README.txt */; };
+		D3B1DAB42864BA140001FE35 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DAB32864BA140001FE35 /* color.swift */; };
+		D3B1DAB82864C20E0001FE35 /* productCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DAB62864C20E0001FE35 /* productCell.swift */; };
+		D3B1DAB92864C20E0001FE35 /* productCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DAB72864C20E0001FE35 /* productCell.xib */; };
+		D3B1DABD2864C4800001FE35 /* productModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DABC2864C4800001FE35 /* productModel.swift */; };
+		D3B1DABF2864C6B30001FE35 /* priceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DABE2864C6B30001FE35 /* priceModel.swift */; };
+		D3B1DAC12864C9DF0001FE35 /* productsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DAC02864C9DE0001FE35 /* productsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4542B85994EE7A2265D70449 /* Pods-online shopping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-online shopping.release.xcconfig"; path = "Target Support Files/Pods-online shopping/Pods-online shopping.release.xcconfig"; sourceTree = "<group>"; };
+		4FBF0A922486684B1959349F /* Pods-online shopping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-online shopping.debug.xcconfig"; path = "Target Support Files/Pods-online shopping/Pods-online shopping.debug.xcconfig"; sourceTree = "<group>"; };
+		C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_online_shopping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B1DA6828649DBE0001FE35 /* online shopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "online shopping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D3B1DA6D28649DBE0001FE35 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D3B1DA6F28649DBE0001FE35 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D3B1DA7228649DBE0001FE35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		D3B1DA7228649DBE0001FE35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/products.storyboard; sourceTree = "<group>"; };
 		D3B1DA7428649DC10001FE35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3B1DA7728649DC10001FE35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3B1DA7928649DC10001FE35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3B1DA862864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D3B1DA882864ACBE0001FE35 /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA892864ACBE0001FE35 /* Raleway-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-MediumItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA8A2864ACBE0001FE35 /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA8B2864ACBE0001FE35 /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
+		D3B1DA8C2864ACBE0001FE35 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
+		D3B1DA8D2864ACBE0001FE35 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
+		D3B1DA8E2864ACBE0001FE35 /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D3B1DA8F2864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA902864ACBE0001FE35 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		D3B1DA912864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA922864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA932864ACBE0001FE35 /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
+		D3B1DA942864ACBE0001FE35 /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
+		D3B1DA952864ACBE0001FE35 /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA962864ACBE0001FE35 /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
+		D3B1DA972864ACBE0001FE35 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
+		D3B1DA982864ACBE0001FE35 /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
+		D3B1DA992864ACBE0001FE35 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
+		D3B1DA9A2864ACBE0001FE35 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		D3B1DA9B2864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D3B1DA9C2864ACBE0001FE35 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		D3B1DAB32864BA140001FE35 /* color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
+		D3B1DAB62864C20E0001FE35 /* productCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCell.swift; sourceTree = "<group>"; };
+		D3B1DAB72864C20E0001FE35 /* productCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = productCell.xib; sourceTree = "<group>"; };
+		D3B1DABC2864C4800001FE35 /* productModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productModel.swift; sourceTree = "<group>"; };
+		D3B1DABE2864C6B30001FE35 /* priceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = priceModel.swift; sourceTree = "<group>"; };
+		D3B1DAC02864C9DE0001FE35 /* productsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +89,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B15312048D9A2674B84BEF /* Pods_online_shopping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		832F8D460D709A3311165AE9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4FBF0A922486684B1959349F /* Pods-online shopping.debug.xcconfig */,
+				4542B85994EE7A2265D70449 /* Pods-online shopping.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B7FD8B8CF387DC99BAA5EDFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D3B1DA5F28649DBE0001FE35 = {
 			isa = PBXGroup;
 			children = (
 				D3B1DA6A28649DBE0001FE35 /* online shopping */,
 				D3B1DA6928649DBE0001FE35 /* Products */,
+				832F8D460D709A3311165AE9 /* Pods */,
+				B7FD8B8CF387DC99BAA5EDFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +134,130 @@
 		D3B1DA6A28649DBE0001FE35 /* online shopping */ = {
 			isa = PBXGroup;
 			children = (
-				D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */,
-				D3B1DA6D28649DBE0001FE35 /* SceneDelegate.swift */,
-				D3B1DA6F28649DBE0001FE35 /* ViewController.swift */,
-				D3B1DA7128649DBE0001FE35 /* Main.storyboard */,
-				D3B1DA7428649DC10001FE35 /* Assets.xcassets */,
-				D3B1DA7628649DC10001FE35 /* LaunchScreen.storyboard */,
-				D3B1DA7928649DC10001FE35 /* Info.plist */,
+				D3B1DABB2864C46B0001FE35 /* Model */,
+				D3B1DA7F28649FA70001FE35 /* AppDelegate */,
+				D3B1DA832864A08B0001FE35 /* launch screen */,
+				D3B1DA8028649FB70001FE35 /* Products Screen */,
+				D3B1DA842864A09F0001FE35 /* Assists */,
+				D3B1DABA2864C4560001FE35 /* Extension */,
 			);
 			path = "online shopping";
+			sourceTree = "<group>";
+		};
+		D3B1DA7F28649FA70001FE35 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		D3B1DA8028649FB70001FE35 /* Products Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA8128649FC70001FE35 /* Controllers */,
+				D3B1DA8228649FD80001FE35 /* Views */,
+				D3B1DAB52864C1C60001FE35 /* Cell */,
+			);
+			path = "Products Screen";
+			sourceTree = "<group>";
+		};
+		D3B1DA8128649FC70001FE35 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */,
+				D3B1DAC02864C9DE0001FE35 /* productsViewModel.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D3B1DA8228649FD80001FE35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA7128649DBE0001FE35 /* products.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D3B1DA832864A08B0001FE35 /* launch screen */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA7628649DC10001FE35 /* LaunchScreen.storyboard */,
+			);
+			path = "launch screen";
+			sourceTree = "<group>";
+		};
+		D3B1DA842864A09F0001FE35 /* Assists */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA852864ACBE0001FE35 /* Raleway */,
+				D3B1DA7428649DC10001FE35 /* Assets.xcassets */,
+				D3B1DA7928649DC10001FE35 /* Info.plist */,
+			);
+			path = Assists;
+			sourceTree = "<group>";
+		};
+		D3B1DA852864ACBE0001FE35 /* Raleway */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA862864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf */,
+				D3B1DA872864ACBE0001FE35 /* static */,
+				D3B1DA9A2864ACBE0001FE35 /* OFL.txt */,
+				D3B1DA9B2864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf */,
+				D3B1DA9C2864ACBE0001FE35 /* README.txt */,
+			);
+			path = Raleway;
+			sourceTree = "<group>";
+		};
+		D3B1DA872864ACBE0001FE35 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DA882864ACBE0001FE35 /* Raleway-BoldItalic.ttf */,
+				D3B1DA892864ACBE0001FE35 /* Raleway-MediumItalic.ttf */,
+				D3B1DA8A2864ACBE0001FE35 /* Raleway-ThinItalic.ttf */,
+				D3B1DA8B2864ACBE0001FE35 /* Raleway-ExtraLight.ttf */,
+				D3B1DA8C2864ACBE0001FE35 /* Raleway-Medium.ttf */,
+				D3B1DA8D2864ACBE0001FE35 /* Raleway-SemiBold.ttf */,
+				D3B1DA8E2864ACBE0001FE35 /* Raleway-ExtraBold.ttf */,
+				D3B1DA8F2864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf */,
+				D3B1DA902864ACBE0001FE35 /* Raleway-Regular.ttf */,
+				D3B1DA912864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf */,
+				D3B1DA922864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf */,
+				D3B1DA932864ACBE0001FE35 /* Raleway-Light.ttf */,
+				D3B1DA942864ACBE0001FE35 /* Raleway-Black.ttf */,
+				D3B1DA952864ACBE0001FE35 /* Raleway-BlackItalic.ttf */,
+				D3B1DA962864ACBE0001FE35 /* Raleway-LightItalic.ttf */,
+				D3B1DA972864ACBE0001FE35 /* Raleway-Thin.ttf */,
+				D3B1DA982864ACBE0001FE35 /* Raleway-Italic.ttf */,
+				D3B1DA992864ACBE0001FE35 /* Raleway-Bold.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		D3B1DAB52864C1C60001FE35 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DAB62864C20E0001FE35 /* productCell.swift */,
+				D3B1DAB72864C20E0001FE35 /* productCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D3B1DABA2864C4560001FE35 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DAB32864BA140001FE35 /* color.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D3B1DABB2864C46B0001FE35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D3B1DABC2864C4800001FE35 /* productModel.swift */,
+				D3B1DABE2864C6B30001FE35 /* priceModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +267,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3B1DA7C28649DC10001FE35 /* Build configuration list for PBXNativeTarget "online shopping" */;
 			buildPhases = (
+				3FE25E3DB8EDF273DEEADDDB /* [CP] Check Pods Manifest.lock */,
 				D3B1DA6428649DBE0001FE35 /* Sources */,
 				D3B1DA6528649DBE0001FE35 /* Frameworks */,
 				D3B1DA6628649DBE0001FE35 /* Resources */,
+				1ABDB095E01B923145513163 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,34 +319,103 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B1DAA82864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf in Resources */,
+				D3B1DAB12864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf in Resources */,
+				D3B1DAAE2864ACBE0001FE35 /* Raleway-Italic.ttf in Resources */,
+				D3B1DAA12864ACBE0001FE35 /* Raleway-ExtraLight.ttf in Resources */,
+				D3B1DAAB2864ACBE0001FE35 /* Raleway-BlackItalic.ttf in Resources */,
 				D3B1DA7828649DC10001FE35 /* LaunchScreen.storyboard in Resources */,
 				D3B1DA7528649DC10001FE35 /* Assets.xcassets in Resources */,
-				D3B1DA7328649DBE0001FE35 /* Main.storyboard in Resources */,
+				D3B1DAAD2864ACBE0001FE35 /* Raleway-Thin.ttf in Resources */,
+				D3B1DA9E2864ACBE0001FE35 /* Raleway-BoldItalic.ttf in Resources */,
+				D3B1DAA22864ACBE0001FE35 /* Raleway-Medium.ttf in Resources */,
+				D3B1DA9F2864ACBE0001FE35 /* Raleway-MediumItalic.ttf in Resources */,
+				D3B1DAA92864ACBE0001FE35 /* Raleway-Light.ttf in Resources */,
+				D3B1DAA02864ACBE0001FE35 /* Raleway-ThinItalic.ttf in Resources */,
+				D3B1DAB02864ACBE0001FE35 /* OFL.txt in Resources */,
+				D3B1DAB22864ACBE0001FE35 /* README.txt in Resources */,
+				D3B1DA7328649DBE0001FE35 /* products.storyboard in Resources */,
+				D3B1DAA52864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf in Resources */,
+				D3B1DA9D2864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf in Resources */,
+				D3B1DAA62864ACBE0001FE35 /* Raleway-Regular.ttf in Resources */,
+				D3B1DAAC2864ACBE0001FE35 /* Raleway-LightItalic.ttf in Resources */,
+				D3B1DAAA2864ACBE0001FE35 /* Raleway-Black.ttf in Resources */,
+				D3B1DAA32864ACBE0001FE35 /* Raleway-SemiBold.ttf in Resources */,
+				D3B1DAAF2864ACBE0001FE35 /* Raleway-Bold.ttf in Resources */,
+				D3B1DAA72864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf in Resources */,
+				D3B1DAA42864ACBE0001FE35 /* Raleway-ExtraBold.ttf in Resources */,
+				D3B1DAB92864C20E0001FE35 /* productCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1ABDB095E01B923145513163 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-online shopping/Pods-online shopping-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-online shopping/Pods-online shopping-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-online shopping/Pods-online shopping-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3FE25E3DB8EDF273DEEADDDB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-online shopping-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D3B1DA6428649DBE0001FE35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3B1DA7028649DBE0001FE35 /* ViewController.swift in Sources */,
+				D3B1DAC12864C9DF0001FE35 /* productsViewModel.swift in Sources */,
+				D3B1DAB42864BA140001FE35 /* color.swift in Sources */,
+				D3B1DABF2864C6B30001FE35 /* priceModel.swift in Sources */,
+				D3B1DAB82864C20E0001FE35 /* productCell.swift in Sources */,
+				D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */,
 				D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */,
-				D3B1DA6E28649DBE0001FE35 /* SceneDelegate.swift in Sources */,
+				D3B1DABD2864C4800001FE35 /* productModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D3B1DA7128649DBE0001FE35 /* Main.storyboard */ = {
+		D3B1DA7128649DBE0001FE35 /* products.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D3B1DA7228649DBE0001FE35 /* Base */,
 			);
-			name = Main.storyboard;
+			name = products.storyboard;
 			sourceTree = "<group>";
 		};
 		D3B1DA7628649DC10001FE35 /* LaunchScreen.storyboard */ = {
@@ -283,12 +547,14 @@
 		};
 		D3B1DA7D28649DC10001FE35 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FBF0A922486684B1959349F /* Pods-online shopping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4YZSY77G5;
-				INFOPLIST_FILE = "online shopping/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/online shopping/Assists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,18 +562,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myorganization199.online-shopping";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		D3B1DA7E28649DC10001FE35 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4542B85994EE7A2265D70449 /* Pods-online shopping.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4YZSY77G5;
-				INFOPLIST_FILE = "online shopping/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/online shopping/Assists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myorganization199.online-shopping";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
