@@ -21,7 +21,7 @@ class productCell: UICollectionViewCell {
     
     func configureCell (product: productModel) {
         productTitleLabel.text = product.name
-        productPriceLabel.text = product.prices[0].fragments.priceDetails.currency.symbol + String(product.prices[0].fragments.priceDetails.amount)
+        productPriceLabel.text = product.prices[0].currency.symbol + String(product.prices[0].amount)
         
         DispatchQueue.main.async {
             guard let image = product.gallery[0] else {

@@ -10,3 +10,20 @@ import Apollo
 
 let url = URL(string: "https://c8e9-41-42-47-224.eu.ngrok.io/")
 let apollo = ApolloClient(url: url!)
+
+
+protocol mine {
+    
+}
+
+extension AllproducsQuery.Data.Category.Product : mine {
+    
+}
+
+extension AllproducsWithColthesTagQuery.Data.Category.Product : mine {
+    
+}
+
+extension AllproducsWithTechTagQuery.Data.Category.Product : mine {
+    
+}

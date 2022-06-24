@@ -30,4 +30,3 @@ fragment priceDetails on Price {
   }
   amount
 }
-

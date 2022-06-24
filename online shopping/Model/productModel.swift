@@ -12,5 +12,6 @@ struct productModel {
     var id: String
     var name: String
     var gallery: [String?]
-    var prices: [ProductsDetails.Price]
+//    var prices: [ProductsDetails.Price]
+    var prices: [priceModel]
 }

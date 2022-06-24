@@ -21,6 +21,29 @@ class productsViewModel {
     var watcherColthes: GraphQLQueryWatcher<AllproducsWithColthesTagQuery>?
     var techColthes: GraphQLQueryWatcher<AllproducsWithTechTagQuery>?
     
+    private func ConvertToArray<T: GraphQLSelectionSet>(data: [T]) {
+        var arr = Array<productModel>()
+        
+        for i in data {
+            let prices = i.resultMap["prices"] as! [[String: Any]]
+
+            var pricesArr = Array<priceModel>()
+
+            for j in prices {
+
+                let element = j["currency"].jsonValue as! [String: String]
+                pricesArr.append(priceModel(amount: j["amount"] as! Double, currency: currencyModel(symbol: element["symbol"]!)))
+            }
+
+            arr.append(productModel(id: i.resultMap["id"] as! String , name: i.resultMap["name"] as! String, gallery: i.resultMap["gallery"] as! [String?], prices: pricesArr))
+        }
+        
+        var arr1 = self.productsBehaviour.value
+        arr1.removeAll()
+        arr1 = arr
+        self.productsBehaviour.accept(arr1)
+    }
+    
     
     func fetchDataOperation() {
         
@@ -32,16 +55,7 @@ class productsViewModel {
             case .success(let result):
                 guard let data = result.data?.category?.products as? [AllproducsQuery.Data.Category.Product] else { return }
                 
-                var arr = Array<productModel>()
-                
-                for i in data {
-                    arr.append(productModel(id: i.fragments.productsDetails.id, name: i.fragments.productsDetails.name, gallery: i.fragments.productsDetails.gallery ?? [], prices: i.fragments.productsDetails.prices))
-                }
-                
-                var arr1 = self.productsBehaviour.value
-                arr1.removeAll()
-                arr1 = arr
-                self.productsBehaviour.accept(arr1)
+                self.ConvertToArray(data: data)
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -52,25 +66,14 @@ class productsViewModel {
     
     func fetchDataClothesOperation() {
         
-        watcherColthes = apollo.watch(query: AllproducsWithColthesTagQuery()) { response in
+        watcherColthes = apollo.watch(query: AllproducsWithColthesTagQuery()) { [weak self] response in
+            guard let self = self else { return }
             switch response {
                 
             case .success(let result):
                 guard let data = result.data?.category?.products as? [AllproducsWithColthesTagQuery.Data.Category.Product] else { return }
                 
-                var arr = Array<productModel>()
-                
-                for i in data {
-                    guard let gallery = i.fragments.productsDetails.gallery else {
-                        return
-                    }
-                    arr.append(productModel(id: i.fragments.productsDetails.id, name: i.fragments.productsDetails.name, gallery: gallery, prices: i.fragments.productsDetails.prices))
-                }
-                
-                var arr1 = self.productsBehaviour.value
-                arr1.removeAll()
-                arr1 = arr
-                self.productsBehaviour.accept(arr1)
+                self.ConvertToArray(data: data)
                 
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -81,25 +84,14 @@ class productsViewModel {
     
     func fetchDataTechOperation() {
         
-        techColthes = apollo.watch(query: AllproducsWithTechTagQuery()) { response in
+        techColthes = apollo.watch(query: AllproducsWithTechTagQuery()) { [weak self] response in
+            guard let self = self else { return }
             switch response {
                 
             case .success(let result):
                 guard let data = result.data?.category?.products as? [AllproducsWithTechTagQuery.Data.Category.Product] else { return }
                 
-                var arr = Array<productModel>()
-                
-                for i in data {
-                    guard let gallery = i.fragments.productsDetails.gallery else {
-                        return
-                    }
-                    arr.append(productModel(id: i.fragments.productsDetails.id, name: i.fragments.productsDetails.name, gallery: gallery, prices: i.fragments.productsDetails.prices))
-                }
-                
-                var arr1 = self.productsBehaviour.value
-                arr1.removeAll()
-                arr1 = arr
-                self.productsBehaviour.accept(arr1)
+                self.ConvertToArray(data: data)
                 
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
