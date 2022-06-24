@@ -1,0 +1,33 @@
+query Allproducs {
+  category(input: {title: "all"}) {
+	products { ...productsDetails }
+  }
+}
+
+query AllproducsWithColthesTag {
+  category(input: {title: "clothes"}) {
+	products { ...productsDetails }
+  }
+}
+
+query AllproducsWithTechTag {
+  category(input: {title: "tech"}) {
+	products { ...productsDetails }
+  }
+}
+
+fragment productsDetails on Product {
+  id
+  name
+  inStock
+  gallery
+	prices { ...priceDetails }
+}
+
+fragment priceDetails on Price {
+  currency {
+	symbol
+  }
+  amount
+}
+

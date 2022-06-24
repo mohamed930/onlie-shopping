@@ -21,10 +21,15 @@ class productCell: UICollectionViewCell {
     
     func configureCell (product: productModel) {
         productTitleLabel.text = product.name
-        productPriceLabel.text = product.prices[0].currency.symbol + String(product.prices[0].amount)
+        productPriceLabel.text = product.prices[0].fragments.priceDetails.currency.symbol + String(product.prices[0].fragments.priceDetails.amount)
         
         DispatchQueue.main.async {
-            self.productImageView.kf.setImage(with:URL(string: product.gallery[0].trimmingCharacters(in: .whitespaces))!,placeholder: UIImage(named: "ProductImage"))
+            guard let image = product.gallery[0] else {
+                self.productImageView.image = UIImage(named: "ProductImage")
+                return
+            }
+            
+            self.productImageView.kf.setImage(with:URL(string: image.trimmingCharacters(in: .whitespaces) )!,placeholder: UIImage(named: "ProductImage"))
         }
     }
 }

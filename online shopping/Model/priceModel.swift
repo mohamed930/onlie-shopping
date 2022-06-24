@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct priceModel {
-    var amount: Double
-    var currency: currencyModel
-}
-
-struct currencyModel {
-    var label: String
-    var symbol: String
-}
+//struct priceModel{
+//    var amount: Double
+//    var currency: currencyModel
+//}
+//
+//struct currencyModel {
+//    var label: String
+//    var symbol: String
+//}

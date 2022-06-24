@@ -40,16 +40,29 @@ class ProductsViewController: UIViewController {
         lines = [WomanLine,manLine,KidsLine]
         titlesLabels = [WomanLabel,manLabel,KidsLabel]
         
-        AddTouchRecognizeAction(index: 0, label: WomanLabel)
-        AddTouchRecognizeAction(index: 1, label: manLabel)
-        AddTouchRecognizeAction(index: 2, label: KidsLabel)
+        AddTouchRecognizeAction(index: 0, label: WomanLabel) { response in
+            if response {
+                self.FetchDataOperation()
+            }
+        }
+        AddTouchRecognizeAction(index: 1, label: manLabel) { response in
+            if response {
+                self.productviewmodel.fetchDataClothesOperation()
+            }
+            
+        }
+        AddTouchRecognizeAction(index: 2, label: KidsLabel) {response in
+            if response {
+                self.productviewmodel.fetchDataTechOperation()
+            }
+        }
         
         ConfigureCollectionView()
         BindToCollectionView()
         FetchDataOperation()
     }
     
-    func AddTouchRecognizeAction(index: Int,label: UILabel) {
+    func AddTouchRecognizeAction(index: Int,label: UILabel,completion: @escaping (Bool) -> ()) {
         AddGuester(label: label) { [weak self] send in
             guard let self = self else { return }
             
@@ -65,6 +78,8 @@ class ProductsViewController: UIViewController {
                     self.titlesLabels![i].textColor = UIColor.black
                 }
             }
+            
+            completion(true)
         }
     }
     
@@ -108,6 +123,6 @@ class ProductsViewController: UIViewController {
     }
     
     func FetchDataOperation() {
-        productviewmodel.FetchData()
+        productviewmodel.fetchDataOperation()
     }
 }

@@ -6,10 +6,11 @@
 //
 
 import Foundation
+//import Apollo
 
 struct productModel {
     var id: String
     var name: String
-    var gallery: [String]
-    var prices: [priceModel]
+    var gallery: [String?]
+    var prices: [ProductsDetails.Price]
 }

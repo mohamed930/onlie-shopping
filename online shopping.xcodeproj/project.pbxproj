@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C1B15312048D9A2674B84BEF /* Pods_online_shopping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */; };
+		D33873852865BFDC00592B13 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = D33873842865BFDC00592B13 /* schema.json */; };
+		D39086942865D03600F18416 /* calls.graphql in Resources */ = {isa = PBXBuildFile; fileRef = D39086932865D03600F18416 /* calls.graphql */; };
+		D39086982865D43300F18416 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086972865D43200F18416 /* API.swift */; };
+		D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086992865D4C300F18416 /* BaseUrl.swift */; };
 		D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */; };
 		D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */; };
 		D3B1DA7328649DBE0001FE35 /* products.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7128649DBE0001FE35 /* products.storyboard */; };
@@ -47,6 +51,10 @@
 		4542B85994EE7A2265D70449 /* Pods-online shopping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-online shopping.release.xcconfig"; path = "Target Support Files/Pods-online shopping/Pods-online shopping.release.xcconfig"; sourceTree = "<group>"; };
 		4FBF0A922486684B1959349F /* Pods-online shopping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-online shopping.debug.xcconfig"; path = "Target Support Files/Pods-online shopping/Pods-online shopping.debug.xcconfig"; sourceTree = "<group>"; };
 		C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_online_shopping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D33873842865BFDC00592B13 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		D39086932865D03600F18416 /* calls.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = calls.graphql; sourceTree = "<group>"; };
+		D39086972865D43200F18416 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = "online shopping/API.swift"; sourceTree = SOURCE_ROOT; };
+		D39086992865D4C300F18416 /* BaseUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
 		D3B1DA6828649DBE0001FE35 /* online shopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "online shopping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +121,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D33873832865BFBF00592B13 /* Backend layer */ = {
+			isa = PBXGroup;
+			children = (
+				D39086932865D03600F18416 /* calls.graphql */,
+				D39086972865D43200F18416 /* API.swift */,
+				D39086992865D4C300F18416 /* BaseUrl.swift */,
+			);
+			path = "Backend layer";
+			sourceTree = "<group>";
+		};
 		D3B1DA5F28649DBE0001FE35 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +152,8 @@
 		D3B1DA6A28649DBE0001FE35 /* online shopping */ = {
 			isa = PBXGroup;
 			children = (
+				D33873842865BFDC00592B13 /* schema.json */,
+				D33873832865BFBF00592B13 /* Backend layer */,
 				D3B1DABB2864C46B0001FE35 /* Model */,
 				D3B1DA7F28649FA70001FE35 /* AppDelegate */,
 				D3B1DA832864A08B0001FE35 /* launch screen */,
@@ -267,6 +287,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3B1DA7C28649DC10001FE35 /* Build configuration list for PBXNativeTarget "online shopping" */;
 			buildPhases = (
+				D39086962865D11900F18416 /* Apollo graphql */,
 				3FE25E3DB8EDF273DEEADDDB /* [CP] Check Pods Manifest.lock */,
 				D3B1DA6428649DBE0001FE35 /* Sources */,
 				D3B1DA6528649DBE0001FE35 /* Frameworks */,
@@ -338,11 +359,13 @@
 				D3B1DAA52864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf in Resources */,
 				D3B1DA9D2864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf in Resources */,
 				D3B1DAA62864ACBE0001FE35 /* Raleway-Regular.ttf in Resources */,
+				D33873852865BFDC00592B13 /* schema.json in Resources */,
 				D3B1DAAC2864ACBE0001FE35 /* Raleway-LightItalic.ttf in Resources */,
 				D3B1DAAA2864ACBE0001FE35 /* Raleway-Black.ttf in Resources */,
 				D3B1DAA32864ACBE0001FE35 /* Raleway-SemiBold.ttf in Resources */,
 				D3B1DAAF2864ACBE0001FE35 /* Raleway-Bold.ttf in Resources */,
 				D3B1DAA72864ACBE0001FE35 /* Raleway-ExtraLightItalic.ttf in Resources */,
+				D39086942865D03600F18416 /* calls.graphql in Resources */,
 				D3B1DAA42864ACBE0001FE35 /* Raleway-ExtraBold.ttf in Resources */,
 				D3B1DAB92864C20E0001FE35 /* productCell.xib in Resources */,
 			);
@@ -390,6 +413,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D39086962865D11900F18416 /* Apollo graphql */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Apollo graphql";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -401,8 +442,10 @@
 				D3B1DAB42864BA140001FE35 /* color.swift in Sources */,
 				D3B1DABF2864C6B30001FE35 /* priceModel.swift in Sources */,
 				D3B1DAB82864C20E0001FE35 /* productCell.swift in Sources */,
+				D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */,
 				D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */,
 				D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */,
+				D39086982865D43300F18416 /* API.swift in Sources */,
 				D3B1DABD2864C4800001FE35 /* productModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
