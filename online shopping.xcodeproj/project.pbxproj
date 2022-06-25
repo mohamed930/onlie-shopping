@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C1B15312048D9A2674B84BEF /* Pods_online_shopping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */; };
 		D33873852865BFDC00592B13 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = D33873842865BFDC00592B13 /* schema.json */; };
+		D3535875286768A4004533CA /* sizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3535873286768A4004533CA /* sizeCell.swift */; };
+		D3535876286768A4004533CA /* sizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3535874286768A4004533CA /* sizeCell.xib */; };
 		D39086942865D03600F18416 /* calls.graphql in Resources */ = {isa = PBXBuildFile; fileRef = D39086932865D03600F18416 /* calls.graphql */; };
 		D39086982865D43300F18416 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086972865D43200F18416 /* API.swift */; };
 		D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086992865D4C300F18416 /* BaseUrl.swift */; };
@@ -57,6 +59,8 @@
 		4FBF0A922486684B1959349F /* Pods-online shopping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-online shopping.debug.xcconfig"; path = "Target Support Files/Pods-online shopping/Pods-online shopping.debug.xcconfig"; sourceTree = "<group>"; };
 		C634DC2093A8D3087D48E4D2 /* Pods_online_shopping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_online_shopping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33873842865BFDC00592B13 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		D3535873286768A4004533CA /* sizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sizeCell.swift; sourceTree = "<group>"; };
+		D3535874286768A4004533CA /* sizeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sizeCell.xib; sourceTree = "<group>"; };
 		D39086932865D03600F18416 /* calls.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = calls.graphql; sourceTree = "<group>"; };
 		D39086972865D43200F18416 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = "online shopping/API.swift"; sourceTree = SOURCE_ROOT; };
 		D39086992865D4C300F18416 /* BaseUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 				D39086992865D4C300F18416 /* BaseUrl.swift */,
 			);
 			path = "Backend layer";
+			sourceTree = "<group>";
+		};
+		D353587228676884004533CA /* sizeCell */ = {
+			isa = PBXGroup;
+			children = (
+				D3535873286768A4004533CA /* sizeCell.swift */,
+				D3535874286768A4004533CA /* sizeCell.xib */,
+			);
+			path = sizeCell;
 			sourceTree = "<group>";
 		};
 		D3B1DA5F28649DBE0001FE35 = {
@@ -321,6 +334,7 @@
 		D3EF2734286756EA00EB1F48 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				D353587228676884004533CA /* sizeCell */,
 				D3EF2735286756F800EB1F48 /* imageCell */,
 			);
 			path = Cell;
@@ -395,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3535876286768A4004533CA /* sizeCell.xib in Resources */,
 				D3B1DAA82864ACBE0001FE35 /* Raleway-SemiBoldItalic.ttf in Resources */,
 				D3B1DAB12864ACBE0001FE35 /* Raleway-VariableFont_wght.ttf in Resources */,
 				D3B1DAAE2864ACBE0001FE35 /* Raleway-Italic.ttf in Resources */,
@@ -504,6 +519,7 @@
 				D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */,
 				D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */,
 				D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */,
+				D3535875286768A4004533CA /* sizeCell.swift in Sources */,
 				D39086982865D43300F18416 /* API.swift in Sources */,
 				D3B1DABD2864C4800001FE35 /* productModel.swift in Sources */,
 				D3B93BC72867372C00E9A2E7 /* productDetailsViewController.swift in Sources */,

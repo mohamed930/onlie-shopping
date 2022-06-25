@@ -21,6 +21,9 @@ class productDetailsViewModel {
     
     var imagesBehavriour = BehaviorRelay<[String]>(value: [])
     
+    var sizeBehaviour = BehaviorRelay<[AttributeDetails.Item?]>(value: [])
+    var ColorBehaviour = BehaviorRelay<[AttributeDetails.Item?]>(value: [])
+    
     var watcher: GraphQLQueryWatcher<ProductDetailsViewQuery>?
     
     func FetchproductDetailsOperation() {

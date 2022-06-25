@@ -21,7 +21,12 @@ class productDetailsViewController: UIViewController {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productBrandLabel: UILabel!
     
+    @IBOutlet weak var SizeView: UIView!
+    @IBOutlet weak var SizeViewHight: NSLayoutConstraint!
     @IBOutlet weak var sizeCollectionView: UICollectionView!
+    
+    @IBOutlet weak var ColorView: UIView!
+    @IBOutlet weak var ColorViewHight: NSLayoutConstraint!
     @IBOutlet weak var ColorCollectionView: UICollectionView!
     @IBOutlet weak var PriceLabel: UILabel!
     
@@ -32,6 +37,7 @@ class productDetailsViewController: UIViewController {
     let disposebag = DisposeBag()
     let productdetailsviewmodel = productDetailsViewModel()
     let nibFileName = "imageCell"
+    let SizenibFileName = "sizeCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +46,8 @@ class productDetailsViewController: UIViewController {
         subscribeToresponse()
         ConfigureImageCollectionView()
         SubscribeToImageCollectionView()
+        SubscribeToSizeCollectionView()
+        SubscribeToColorCollectionView()
         SubscribeToSelectImage()
         loadData()
     }
@@ -96,7 +104,48 @@ class productDetailsViewController: UIViewController {
                 self.productImageCollectionViewHight.constant = 0
             }
             
-            self.productdetailsviewmodel.imagesBehavriour.accept(images.arrayWithoutFirstElement() as! [String])
+            self.productdetailsviewmodel.imagesBehavriour.accept(images as! [String])
+            
+            guard let attribute = productDetails.attributes else { return }
+            
+            if attribute.isEmpty {
+                self.ColorViewHight.constant = 0
+                self.SizeViewHight.constant = 0
+                self.SizeView.isHidden = true
+                self.ColorView.isHidden = true
+            }
+            else {
+                
+                var FColor = false
+                var FSize = false
+                
+                for i in attribute {
+                    guard let i = i else { return }
+                    
+                    if i.fragments.attributeDetails.name == "Color" {
+                        guard let items = i.fragments.attributeDetails.items else { return }
+                        FColor = true
+                        self.productdetailsviewmodel.ColorBehaviour.accept(items)
+                        
+                    }
+                    else if i.fragments.attributeDetails.name == "Capacity" || i.fragments.attributeDetails.name == "Size" {
+                        guard let items = i.fragments.attributeDetails.items else { return }
+                        FSize = true
+                        self.productdetailsviewmodel.sizeBehaviour.accept(items)
+                    }
+                }
+                
+                if !FColor {
+                    self.ColorViewHight.constant = 0
+                    self.ColorView.isHidden = true
+                }
+                
+                if !FSize {
+                    self.SizeViewHight.constant = 0
+                    self.SizeView.isHidden = true
+                }
+            }
+            
             
             if productDetails.inStock! {
                 self.AddCartButton.isHidden = false
@@ -113,32 +162,60 @@ class productDetailsViewController: UIViewController {
         
         productImagesCollectionView.register(UINib(nibName: nibFileName, bundle: nil), forCellWithReuseIdentifier: nibFileName)
         
+        sizeCollectionView.register(UINib(nibName: SizenibFileName, bundle: nil), forCellWithReuseIdentifier: SizenibFileName)
+        
+        ColorCollectionView.register(UINib(nibName: SizenibFileName, bundle: nil), forCellWithReuseIdentifier: SizenibFileName)
+        
+        let flowlayout = FlowLayout(collectionView: productImagesCollectionView)
+        let flowlayout2 = FlowLayout(collectionView: sizeCollectionView)
+        let flowlayout3 = FlowLayout(collectionView: ColorCollectionView)
+        
+        productImagesCollectionView.collectionViewLayout = flowlayout
+        sizeCollectionView.collectionViewLayout = flowlayout2
+        
+        flowlayout3.itemSize = CGSize(width: ColorCollectionView.frame.size.height, height: ColorCollectionView.frame.size.height)
+        ColorCollectionView.collectionViewLayout = flowlayout3
+    }
+    
+    private func FlowLayout(collectionView: UICollectionView) -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
         
         var size = 0
         
         if self.view.frame.height == 667 {
-            size = Int(((productImagesCollectionView.frame.size.width - 10) / CGFloat(4)))
+            size = Int(((collectionView.frame.size.width - 10) / CGFloat(4)))
         }
         else if self.view.frame.height == 568 {
-            size = Int((productImagesCollectionView.frame.size.width / CGFloat(4)) - 5)
+            size = Int((collectionView.frame.size.width / CGFloat(4)) - 5)
         }
         else {
-            size = Int((productImagesCollectionView.frame.size.width / CGFloat(4)) + 15)
+            size = Int((collectionView.frame.size.width / CGFloat(4)) + 15)
         }
         
-        flowLayout.itemSize = CGSize(width: size, height: Int(productImagesCollectionView.frame.size.height - 10))
+        flowLayout.itemSize = CGSize(width: size, height: Int(collectionView.frame.size.height - 10))
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 0
         
-        productImagesCollectionView.collectionViewLayout = flowLayout
+        return flowLayout
     }
     
     func SubscribeToImageCollectionView() {
         productdetailsviewmodel.imagesBehavriour.bind(to: productImagesCollectionView.rx.items(cellIdentifier: nibFileName, cellType: imageCell.self)) { row, branch , cell in
             cell.configureCell(image: branch)
+        }.disposed(by: disposebag)
+    }
+    
+    func SubscribeToSizeCollectionView() {
+        productdetailsviewmodel.sizeBehaviour.bind(to: sizeCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { row, branch , cell in
+            cell.ConfigureSizeCell(sizeNumber: (branch?.displayValue)!)
+        }.disposed(by: disposebag)
+    }
+    
+    func SubscribeToColorCollectionView() {
+        productdetailsviewmodel.ColorBehaviour.bind(to: ColorCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { row, branch , cell in
+            cell.ConfigureColorCell(colorCode: (branch?.value)!)
         }.disposed(by: disposebag)
     }
     
@@ -163,17 +240,5 @@ class productDetailsViewController: UIViewController {
     
     func loadData() {
         productdetailsviewmodel.FetchproductDetailsOperation()
-    }
-}
-
-
-extension Array {
-    func arrayWithoutFirstElement() -> Array {
-        if count != 0 { // Check if Array is empty to prevent crash
-            var newArray = Array(self)
-            newArray.removeFirst()
-            return newArray
-        }
-        return []
     }
 }
