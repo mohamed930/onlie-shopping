@@ -45,7 +45,7 @@
                                 <rect key="frame" x="0.0" y="110" width="375" height="702"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7e-sG-Xu1">
-                                        <rect key="frame" x="4" y="0.0" width="367" height="1066"/>
+                                        <rect key="frame" x="4" y="0.0" width="367" height="1073"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProductImage" translatesAutoresizingMaskIntoConstraints="NO" id="d4R-qI-WgY">
                                                 <rect key="frame" x="12" y="8" width="347" height="270"/>
@@ -53,14 +53,14 @@
                                                     <constraint firstAttribute="height" constant="270" id="Zzs-Nj-jo1"/>
                                                 </constraints>
                                             </imageView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LfI-mO-eR7">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LfI-mO-eR7">
                                                 <rect key="frame" x="38" y="286" width="291" height="65"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="65" id="TAA-jk-8aF"/>
                                                     <constraint firstAttribute="width" constant="291" id="bvh-nl-TSH"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ma1-vi-ezD">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ma1-vi-ezD">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -68,8 +68,8 @@
                                                 </collectionViewFlowLayout>
                                                 <cells/>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apollo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezk-fo-mEv">
-                                                <rect key="frame" x="12" y="359" width="343" height="38"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apollo" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="ezk-fo-mEv">
+                                                <rect key="frame" x="12" y="366" width="343" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="adr-i1-QEh"/>
                                                 </constraints>
@@ -78,13 +78,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running Short" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4N-kd-NeW">
-                                                <rect key="frame" x="12" y="407" width="343" height="41"/>
-                                                <fontDescription key="fontDescription" name="Raleway-Regular" family="Raleway" pointSize="30"/>
+                                                <rect key="frame" x="12" y="414" width="343" height="41"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Regular" family="Raleway" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPd-Ud-Cne">
-                                                <rect key="frame" x="12" y="481" width="343" height="31"/>
+                                                <rect key="frame" x="12" y="488" width="343" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="XpI-lw-Hdb"/>
                                                 </constraints>
@@ -93,7 +93,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sae-Fi-mOd">
-                                                <rect key="frame" x="12" y="520" width="343" height="46"/>
+                                                <rect key="frame" x="12" y="527" width="343" height="46"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="GBQ-eO-E64"/>
@@ -107,7 +107,7 @@
                                                 <cells/>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLOR:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oda-h4-W3o">
-                                                <rect key="frame" x="12" y="574" width="343" height="31"/>
+                                                <rect key="frame" x="12" y="581" width="343" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="rRm-lC-pzn"/>
                                                 </constraints>
@@ -116,7 +116,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRICE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDN-yC-HHW">
-                                                <rect key="frame" x="12" y="667" width="343" height="31"/>
+                                                <rect key="frame" x="12" y="674" width="343" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="JDE-zz-fVC"/>
                                                 </constraints>
@@ -125,7 +125,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YgB-0G-16h">
-                                                <rect key="frame" x="12" y="613" width="343" height="46"/>
+                                                <rect key="frame" x="12" y="620" width="343" height="46"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="yKz-2u-vT0"/>
@@ -139,13 +139,13 @@
                                                 <cells/>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qj-bT-EbW">
-                                                <rect key="frame" x="12" y="712" width="343" height="37"/>
+                                                <rect key="frame" x="12" y="719" width="343" height="37"/>
                                                 <fontDescription key="fontDescription" name="Raleway-ExtraBold" family="Raleway" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsY-9p-IZb">
-                                                <rect key="frame" x="12" y="772" width="343" height="164"/>
+                                                <rect key="frame" x="12" y="779" width="343" height="164"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="164" id="Aqh-Iw-SIP"/>
                                                 </constraints>
@@ -155,7 +155,7 @@
                                                 </wkWebViewConfiguration>
                                             </wkWebView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASR-A4-yVL">
-                                                <rect key="frame" x="12" y="974" width="343" height="50"/>
+                                                <rect key="frame" x="12" y="981" width="343" height="50"/>
                                                 <color key="backgroundColor" red="0.36862745099999999" green="0.80784313730000001" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="l7K-3A-knH"/>
@@ -189,7 +189,7 @@
                                             <constraint firstItem="8Qj-bT-EbW" firstAttribute="top" secondItem="WDN-yC-HHW" secondAttribute="bottom" constant="14" id="PoG-kg-Cu5"/>
                                             <constraint firstItem="z4N-kd-NeW" firstAttribute="top" secondItem="ezk-fo-mEv" secondAttribute="bottom" constant="10" id="Qzn-xL-CvO"/>
                                             <constraint firstItem="sae-Fi-mOd" firstAttribute="leading" secondItem="wPd-Ud-Cne" secondAttribute="leading" id="UEs-BO-v83"/>
-                                            <constraint firstItem="ezk-fo-mEv" firstAttribute="top" secondItem="LfI-mO-eR7" secondAttribute="bottom" constant="8" symbolic="YES" id="UPY-nN-JIS"/>
+                                            <constraint firstItem="ezk-fo-mEv" firstAttribute="top" secondItem="LfI-mO-eR7" secondAttribute="bottom" constant="15" id="UPY-nN-JIS"/>
                                             <constraint firstItem="WDN-yC-HHW" firstAttribute="leading" secondItem="YgB-0G-16h" secondAttribute="leading" id="Uq6-fE-HtB"/>
                                             <constraint firstItem="QsY-9p-IZb" firstAttribute="top" secondItem="8Qj-bT-EbW" secondAttribute="bottom" constant="23" id="W9i-mn-fPu"/>
                                             <constraint firstItem="LfI-mO-eR7" firstAttribute="centerX" secondItem="s7e-sG-Xu1" secondAttribute="centerX" id="Ycm-YO-v3R"/>
@@ -251,6 +251,7 @@
                         <outlet property="PriceLabel" destination="8Qj-bT-EbW" id="RIS-Pm-6L3"/>
                         <outlet property="productBrandLabel" destination="z4N-kd-NeW" id="fqb-BL-2yk"/>
                         <outlet property="productDetailsLabel" destination="QsY-9p-IZb" id="ibf-eh-cp9"/>
+                        <outlet property="productImageCollectionViewHight" destination="TAA-jk-8aF" id="QOc-yY-J0n"/>
                         <outlet property="productImageView" destination="d4R-qI-WgY" id="bbm-R8-xBp"/>
                         <outlet property="productImagesCollectionView" destination="LfI-mO-eR7" id="dLR-2N-PvC"/>
                         <outlet property="productNameLabel" destination="ezk-fo-mEv" id="yrL-BE-03z"/>

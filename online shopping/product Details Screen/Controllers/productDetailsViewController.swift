@@ -16,6 +16,7 @@ class productDetailsViewController: UIViewController {
     
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productImagesCollectionView: UICollectionView!
+    @IBOutlet weak var productImageCollectionViewHight: NSLayoutConstraint!
     
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productBrandLabel: UILabel!
@@ -30,12 +31,16 @@ class productDetailsViewController: UIViewController {
     
     let disposebag = DisposeBag()
     let productdetailsviewmodel = productDetailsViewModel()
+    let nibFileName = "imageCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SubscribeToBackButton()
         subscribeToresponse()
+        ConfigureImageCollectionView()
+        SubscribeToImageCollectionView()
+        SubscribeToSelectImage()
         loadData()
     }
     
@@ -82,6 +87,17 @@ class productDetailsViewController: UIViewController {
                 self.productImageView.kf.setImage(with:URL(string: image.trimmingCharacters(in: .whitespaces) )!,placeholder: UIImage(named: "ProductImage"))
             }
             
+            guard let images = productDetails.gallery else { return }
+            
+            if images.count > 1 {
+                self.productImageCollectionViewHight.constant = 65
+            }
+            else {
+                self.productImageCollectionViewHight.constant = 0
+            }
+            
+            self.productdetailsviewmodel.imagesBehavriour.accept(images.arrayWithoutFirstElement() as! [String])
+            
             if productDetails.inStock! {
                 self.AddCartButton.isHidden = false
             }
@@ -93,7 +109,71 @@ class productDetailsViewController: UIViewController {
         }).disposed(by: disposebag)
     }
     
+    func ConfigureImageCollectionView() {
+        
+        productImagesCollectionView.register(UINib(nibName: nibFileName, bundle: nil), forCellWithReuseIdentifier: nibFileName)
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        
+        var size = 0
+        
+        if self.view.frame.height == 667 {
+            size = Int(((productImagesCollectionView.frame.size.width - 10) / CGFloat(4)))
+        }
+        else if self.view.frame.height == 568 {
+            size = Int((productImagesCollectionView.frame.size.width / CGFloat(4)) - 5)
+        }
+        else {
+            size = Int((productImagesCollectionView.frame.size.width / CGFloat(4)) + 15)
+        }
+        
+        flowLayout.itemSize = CGSize(width: size, height: Int(productImagesCollectionView.frame.size.height - 10))
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.minimumInteritemSpacing = 0
+        
+        productImagesCollectionView.collectionViewLayout = flowLayout
+    }
+    
+    func SubscribeToImageCollectionView() {
+        productdetailsviewmodel.imagesBehavriour.bind(to: productImagesCollectionView.rx.items(cellIdentifier: nibFileName, cellType: imageCell.self)) { row, branch , cell in
+            cell.configureCell(image: branch)
+        }.disposed(by: disposebag)
+    }
+    
+    func SubscribeToSelectImage() {
+        Observable.zip(productImagesCollectionView.rx.itemSelected, productImagesCollectionView.rx.modelSelected(String?.self))
+            .bind { [weak self] selectedIndex, branch in
+
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    guard let image = branch else {
+                        self.productImageView.image = UIImage(named: "ProductImage")
+                        return
+                    }
+                    
+                    self.productImageView.kf.setImage(with:URL(string: image.trimmingCharacters(in: .whitespaces) )!,placeholder: UIImage(named: "ProductImage"))
+                }
+//                print(selectedIndex[1], branch.UserName)
+        }
+        .disposed(by: disposebag)
+    }
+    
     func loadData() {
         productdetailsviewmodel.FetchproductDetailsOperation()
+    }
+}
+
+
+extension Array {
+    func arrayWithoutFirstElement() -> Array {
+        if count != 0 { // Check if Array is empty to prevent crash
+            var newArray = Array(self)
+            newArray.removeFirst()
+            return newArray
+        }
+        return []
     }
 }

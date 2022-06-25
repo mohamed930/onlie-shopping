@@ -19,6 +19,8 @@ class productDetailsViewModel {
         return productDetailsBehvaiour.asObservable()
     }
     
+    var imagesBehavriour = BehaviorRelay<[String]>(value: [])
+    
     var watcher: GraphQLQueryWatcher<ProductDetailsViewQuery>?
     
     func FetchproductDetailsOperation() {

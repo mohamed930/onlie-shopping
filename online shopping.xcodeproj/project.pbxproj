@@ -48,6 +48,8 @@
 		D3B93BC328672D5A00E9A2E7 /* productDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B93BC228672D5A00E9A2E7 /* productDetails.storyboard */; };
 		D3B93BC72867372C00E9A2E7 /* productDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B93BC62867372C00E9A2E7 /* productDetailsViewController.swift */; };
 		D3B93BC928673CBC00E9A2E7 /* productDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B93BC828673CBC00E9A2E7 /* productDetailsViewModel.swift */; };
+		D3EF273C2867574A00EB1F48 /* imageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF273A2867574A00EB1F48 /* imageCell.swift */; };
+		D3EF273D2867574A00EB1F48 /* imageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EF273B2867574A00EB1F48 /* imageCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		D3B93BC228672D5A00E9A2E7 /* productDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = productDetails.storyboard; sourceTree = "<group>"; };
 		D3B93BC62867372C00E9A2E7 /* productDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productDetailsViewController.swift; sourceTree = "<group>"; };
 		D3B93BC828673CBC00E9A2E7 /* productDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productDetailsViewModel.swift; sourceTree = "<group>"; };
+		D3EF273A2867574A00EB1F48 /* imageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCell.swift; sourceTree = "<group>"; };
+		D3EF273B2867574A00EB1F48 /* imageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = imageCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 			children = (
 				D3B93BC52867370B00E9A2E7 /* Controllers */,
 				D3B93BC42867370200E9A2E7 /* Views */,
+				D3EF2734286756EA00EB1F48 /* Cell */,
 			);
 			path = "product Details Screen";
 			sourceTree = "<group>";
@@ -311,6 +316,23 @@
 				D3B93BC62867372C00E9A2E7 /* productDetailsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D3EF2734286756EA00EB1F48 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D3EF2735286756F800EB1F48 /* imageCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D3EF2735286756F800EB1F48 /* imageCell */ = {
+			isa = PBXGroup;
+			children = (
+				D3EF273A2867574A00EB1F48 /* imageCell.swift */,
+				D3EF273B2867574A00EB1F48 /* imageCell.xib */,
+			);
+			path = imageCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +414,7 @@
 				D3B93BC328672D5A00E9A2E7 /* productDetails.storyboard in Resources */,
 				D3B1DAA52864ACBE0001FE35 /* Raleway-ExtraBoldItalic.ttf in Resources */,
 				D3B1DA9D2864ACBE0001FE35 /* Raleway-Italic-VariableFont_wght.ttf in Resources */,
+				D3EF273D2867574A00EB1F48 /* imageCell.xib in Resources */,
 				D3B1DAA62864ACBE0001FE35 /* Raleway-Regular.ttf in Resources */,
 				D33873852865BFDC00592B13 /* schema.json in Resources */,
 				D3B1DAAC2864ACBE0001FE35 /* Raleway-LightItalic.ttf in Resources */,
@@ -477,6 +500,7 @@
 				D3B93BC928673CBC00E9A2E7 /* productDetailsViewModel.swift in Sources */,
 				D3B1DABF2864C6B30001FE35 /* priceModel.swift in Sources */,
 				D3B1DAB82864C20E0001FE35 /* productCell.swift in Sources */,
+				D3EF273C2867574A00EB1F48 /* imageCell.swift in Sources */,
 				D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */,
 				D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */,
 				D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */,
