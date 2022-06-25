@@ -16,6 +16,24 @@ query AllproducsWithTechTag {
   }
 }
 
+query productDetailsView($id: String!) {
+  product(id: $id) {
+	id,
+	name,
+	brand,
+	inStock,
+	gallery,
+	description,
+	category,
+	attributes {
+	  ...attributeDetails
+	}
+	prices {
+	  ...priceDetails
+	}
+  }
+}
+
 fragment productsDetails on Product {
   id
   name
@@ -29,4 +47,15 @@ fragment priceDetails on Price {
 	symbol
   }
   amount
+}
+
+fragment attributeDetails on AttributeSet {
+	id
+	name
+	type
+	items {
+	  displayValue
+	  value
+	  id
+	}
 }

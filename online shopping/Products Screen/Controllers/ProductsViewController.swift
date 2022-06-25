@@ -40,25 +40,11 @@ class ProductsViewController: UIViewController {
         lines = [WomanLine,manLine,KidsLine]
         titlesLabels = [WomanLabel,manLabel,KidsLabel]
         
-        AddTouchRecognizeAction(index: 0, label: WomanLabel) { response in
-            if response {
-                self.FetchDataOperation()
-            }
-        }
-        AddTouchRecognizeAction(index: 1, label: manLabel) { response in
-            if response {
-                self.productviewmodel.fetchDataClothesOperation()
-            }
-            
-        }
-        AddTouchRecognizeAction(index: 2, label: KidsLabel) {response in
-            if response {
-                self.productviewmodel.fetchDataTechOperation()
-            }
-        }
         
+        AddTapGeuseterToFilter()
         ConfigureCollectionView()
         BindToCollectionView()
+        SubscribeToCollectionViewScelection()
         FetchDataOperation()
     }
     
@@ -89,6 +75,25 @@ class ProductsViewController: UIViewController {
         }).disposed(by: disposebag)
     }
     
+    func AddTapGeuseterToFilter() {
+        AddTouchRecognizeAction(index: 0, label: WomanLabel) { response in
+            if response {
+                self.FetchDataOperation()
+            }
+        }
+        AddTouchRecognizeAction(index: 1, label: manLabel) { response in
+            if response {
+                self.productviewmodel.fetchDataClothesOperation()
+            }
+            
+        }
+        AddTouchRecognizeAction(index: 2, label: KidsLabel) {response in
+            if response {
+                self.productviewmodel.fetchDataTechOperation()
+            }
+        }
+    }
+    
     func ConfigureCollectionView() {
         collectionView.register(UINib(nibName: CellnibName, bundle: nil), forCellWithReuseIdentifier: CellIdentifier)
         
@@ -109,7 +114,7 @@ class ProductsViewController: UIViewController {
             size = Int((collectionView.frame.size.width / CGFloat(2)) + 15)
         }
         
-        flowLayout.itemSize = CGSize(width: size, height: size + 50)
+        flowLayout.itemSize = CGSize(width: size, height: size + 70)
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 0
         
@@ -120,6 +125,27 @@ class ProductsViewController: UIViewController {
         productviewmodel.productsBehaviourObserval.bind(to: collectionView.rx.items(cellIdentifier: CellIdentifier, cellType: productCell.self)) { row, branch , cell in
             cell.configureCell(product: branch)
         }.disposed(by: disposebag)
+    }
+    
+    func SubscribeToCollectionViewScelection() {
+        Observable.zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(productModel.self))
+            .bind { [weak self] selectedIndex, branch in
+
+                guard let self = self else { return }
+                
+                let story = UIStoryboard(name: "productDetails", bundle: nil)
+                
+                let next = story.instantiateViewController(withIdentifier: "productDetailsViewController") as! productDetailsViewController
+                
+                next.productdetailsviewmodel.idBehaviour.accept(branch.id)
+                
+                next.modalPresentationStyle = .fullScreen
+                
+                self.present(next, animated: true)
+                
+//                print(selectedIndex[1], branch.UserName)
+        }
+        .disposed(by: disposebag)
     }
     
     func FetchDataOperation() {

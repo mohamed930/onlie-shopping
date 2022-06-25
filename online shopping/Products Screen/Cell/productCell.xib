@@ -47,19 +47,51 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-pw-SNw">
+                                <rect key="frame" x="183" y="220" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="TfV-u0-FAQ"/>
+                                    <constraint firstAttribute="height" constant="35" id="aEp-MV-VcR"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="cartButton"/>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5k-D9-TD2">
+                                <rect key="frame" x="0.0" y="0.0" width="226" height="261"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUT OF STOCK" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="D1O-Ha-Dja">
+                                        <rect key="frame" x="27" y="116" width="173" height="29"/>
+                                        <fontDescription key="fontDescription" name="Raleway-Regular" family="Raleway" pointSize="24"/>
+                                        <color key="textColor" white="0.18430994749069213" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="D1O-Ha-Dja" firstAttribute="centerX" secondItem="V5k-D9-TD2" secondAttribute="centerX" constant="0.5" id="2Td-s8-bbA"/>
+                                    <constraint firstItem="D1O-Ha-Dja" firstAttribute="width" secondItem="V5k-D9-TD2" secondAttribute="width" multiplier="0.85:1" constant="-19.099999999999994" id="JMe-ak-F8m"/>
+                                    <constraint firstItem="D1O-Ha-Dja" firstAttribute="centerY" secondItem="V5k-D9-TD2" secondAttribute="centerY" id="hac-PP-G45"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KaB-uR-rWO" firstAttribute="top" secondItem="c7B-5H-f4i" secondAttribute="top" id="98m-Gj-qmD"/>
+                            <constraint firstItem="V5k-D9-TD2" firstAttribute="leading" secondItem="c7B-5H-f4i" secondAttribute="leading" id="9eU-NB-xFY"/>
                             <constraint firstItem="JiA-O3-VLh" firstAttribute="trailing" secondItem="GlO-nJ-lIh" secondAttribute="trailing" id="CRZ-6t-WFv"/>
+                            <constraint firstAttribute="trailing" secondItem="9w2-pw-SNw" secondAttribute="trailing" constant="8" id="FXL-gW-rM0"/>
                             <constraint firstAttribute="trailing" secondItem="KaB-uR-rWO" secondAttribute="trailing" id="Gz1-Q4-EcA"/>
+                            <constraint firstAttribute="trailing" secondItem="V5k-D9-TD2" secondAttribute="trailing" id="HYM-r6-bco"/>
                             <constraint firstItem="JiA-O3-VLh" firstAttribute="top" secondItem="GlO-nJ-lIh" secondAttribute="bottom" constant="8" symbolic="YES" id="Wah-ck-9Zy"/>
                             <constraint firstItem="GlO-nJ-lIh" firstAttribute="top" secondItem="KaB-uR-rWO" secondAttribute="bottom" constant="8" symbolic="YES" id="XWD-7f-Rap"/>
                             <constraint firstItem="KaB-uR-rWO" firstAttribute="leading" secondItem="c7B-5H-f4i" secondAttribute="leading" id="Yfs-Va-IUP"/>
                             <constraint firstItem="JiA-O3-VLh" firstAttribute="leading" secondItem="GlO-nJ-lIh" secondAttribute="leading" id="gPF-8F-khg"/>
+                            <constraint firstAttribute="bottom" secondItem="9w2-pw-SNw" secondAttribute="bottom" constant="6" id="gRc-bC-zFS"/>
                             <constraint firstAttribute="trailing" secondItem="GlO-nJ-lIh" secondAttribute="trailing" constant="8" id="iJu-Am-5OI"/>
                             <constraint firstItem="KaB-uR-rWO" firstAttribute="height" secondItem="c7B-5H-f4i" secondAttribute="height" multiplier="0.68:1" id="kfA-vQ-VNq"/>
                             <constraint firstItem="GlO-nJ-lIh" firstAttribute="leading" secondItem="c7B-5H-f4i" secondAttribute="leading" constant="8" id="lse-95-Va9"/>
+                            <constraint firstItem="V5k-D9-TD2" firstAttribute="top" secondItem="c7B-5H-f4i" secondAttribute="top" id="wDd-eA-8VI"/>
+                            <constraint firstAttribute="bottom" secondItem="V5k-D9-TD2" secondAttribute="bottom" id="x8b-TX-GLq"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -73,15 +105,18 @@
             </constraints>
             <size key="customSize" width="226" height="261"/>
             <connections>
+                <outlet property="cartButton" destination="9w2-pw-SNw" id="1Qc-hN-iMI"/>
+                <outlet property="outOfStockView" destination="V5k-D9-TD2" id="7tE-Tc-eUp"/>
                 <outlet property="productImageView" destination="KaB-uR-rWO" id="M7p-fC-TpS"/>
                 <outlet property="productPriceLabel" destination="JiA-O3-VLh" id="K3Y-s3-Md9"/>
                 <outlet property="productTitleLabel" destination="GlO-nJ-lIh" id="a4o-nY-8yh"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="144.97767857142856"/>
+            <point key="canvasLocation" x="137.68115942028987" y="143.63839285714286"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="ProductImage" width="532" height="495"/>
+        <image name="cartButton" width="52" height="52"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

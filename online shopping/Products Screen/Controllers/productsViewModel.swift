@@ -35,7 +35,7 @@ class productsViewModel {
                 pricesArr.append(priceModel(amount: j["amount"] as! Double, currency: currencyModel(symbol: element["symbol"]!)))
             }
 
-            arr.append(productModel(id: i.resultMap["id"] as! String , name: i.resultMap["name"] as! String, gallery: i.resultMap["gallery"] as! [String?], prices: pricesArr))
+            arr.append(productModel(id: i.resultMap["id"] as! String , name: i.resultMap["name"] as! String,inStock: (i.resultMap["inStock"] as! Bool), gallery: i.resultMap["gallery"] as! [String?], prices: pricesArr))
         }
         
         var arr1 = self.productsBehaviour.value

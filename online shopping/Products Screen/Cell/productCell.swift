@@ -13,6 +13,9 @@ class productCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var outOfStockView: UIView!
+    
+    @IBOutlet weak var cartButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +33,15 @@ class productCell: UICollectionViewCell {
             }
             
             self.productImageView.kf.setImage(with:URL(string: image.trimmingCharacters(in: .whitespaces) )!,placeholder: UIImage(named: "ProductImage"))
+        }
+        
+        if product.inStock {
+            outOfStockView.isHidden = true
+            cartButton.isHidden = false
+        }
+        else {
+            outOfStockView.isHidden = false
+            cartButton.isHidden = true
         }
     }
 }

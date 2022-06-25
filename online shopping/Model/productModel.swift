@@ -11,6 +11,7 @@ import Foundation
 struct productModel {
     var id: String
     var name: String
+    var inStock: Bool
     var gallery: [String?]
 //    var prices: [ProductsDetails.Price]
     var prices: [priceModel]
