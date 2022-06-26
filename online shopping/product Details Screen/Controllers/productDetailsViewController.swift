@@ -49,6 +49,8 @@ class productDetailsViewController: UIViewController {
         SubscribeToSizeCollectionView()
         SubscribeToColorCollectionView()
         SubscribeToSelectImage()
+        SubscribeToSelectSizeCollection()
+        SubscribeToSelectColorCollection()
         loadData()
     }
     
@@ -236,6 +238,52 @@ class productDetailsViewController: UIViewController {
 //                print(selectedIndex[1], branch.UserName)
         }
         .disposed(by: disposebag)
+    }
+    
+    func SubscribeToSelectSizeCollection() {
+        
+        sizeCollectionView.rx.itemSelected.subscribe(onNext: { indexpath in
+            
+            self.sizeCollectionView.visibleCells.forEach { cell in
+                if let cell = cell as? sizeCell {
+                    cell.sizeView.backgroundColor = UIColor.white
+                    cell.sizeLabel.textColor = .black
+                }
+            }
+            
+            let cell = self.sizeCollectionView.cellForItem(at: indexpath) as? sizeCell
+            
+            let data = self.productdetailsviewmodel.sizeBehaviour.value
+            
+            print("Selected Item = \(data[indexpath.row]?.value ?? "")")
+            
+            cell?.sizeView.backgroundColor = UIColor().hexStringToUIColor(hex: "#1D1F22")
+            cell?.sizeLabel.textColor = UIColor.white
+            
+        }).disposed(by: disposebag)
+    }
+    
+    func SubscribeToSelectColorCollection() {
+     
+        ColorCollectionView.rx.itemSelected.subscribe(onNext: { indexpath in
+            
+            self.ColorCollectionView.visibleCells.forEach { cell in
+                if let cell = cell as? sizeCell {
+                    cell.sizeView.layer.borderColor = UIColor.clear.cgColor
+                }
+            }
+            
+            let cell = self.ColorCollectionView.cellForItem(at: indexpath) as? sizeCell
+            
+            let data = self.productdetailsviewmodel.ColorBehaviour.value
+            
+            print("Selected Item = \(data[indexpath.row]?.displayValue ?? "")")
+            
+            cell?.sizeView.layer.borderColor = UIColor().hexStringToUIColor(hex: "#5ECE7B").cgColor
+            cell?.sizeView.layer.borderWidth = 2
+            
+        }).disposed(by: disposebag)
+        
     }
     
     func loadData() {
