@@ -24,6 +24,14 @@ class productDetailsViewModel {
     var sizeBehaviour = BehaviorRelay<[AttributeDetails.Item?]>(value: [])
     var ColorBehaviour = BehaviorRelay<[AttributeDetails.Item?]>(value: [])
     
+    var pickedSizeBehaviour = BehaviorRelay<String?>(value: nil)
+    var pickedColorBehaviour = BehaviorRelay<String?>(value: nil)
+    
+    private var savedResponseBehacviour = BehaviorRelay<String>(value: "")
+    var SavedResponseBehaviourObserval: Observable<String> {
+        return savedResponseBehacviour.asObservable()
+    }
+    
     var watcher: GraphQLQueryWatcher<ProductDetailsViewQuery>?
     
     func FetchproductDetailsOperation() {
@@ -42,6 +50,18 @@ class productDetailsViewModel {
                 print("Error: \(error.localizedDescription)")
             }
         })
+    }
+    
+    func SaveDataToCart() {
+        let uuid = UUID().uuidString
+        
+        let productData = cartModel(id: uuid, productId: idBehaviour.value, pickedSize: pickedSizeBehaviour.value, pickedColor: pickedColorBehaviour.value)
+        
+        print(RealmSwiftLayer.realmFileLocation) // Remove it.
+        
+        let response = RealmSwiftLayer.Save(productData)
+        
+        savedResponseBehacviour.accept(response)
     }
     
 }

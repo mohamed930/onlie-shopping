@@ -10,6 +10,10 @@ import WebKit
 import RxSwift
 import RxCocoa
 
+protocol representToHomeScreen {
+    func sendToBack(flag: Bool)
+}
+
 class productDetailsViewController: UIViewController {
     
     @IBOutlet weak var BackButton: UIButton!
@@ -38,6 +42,7 @@ class productDetailsViewController: UIViewController {
     let productdetailsviewmodel = productDetailsViewModel()
     let nibFileName = "imageCell"
     let SizenibFileName = "sizeCell"
+    var delegate: representToHomeScreen!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +56,8 @@ class productDetailsViewController: UIViewController {
         SubscribeToSelectImage()
         SubscribeToSelectSizeCollection()
         SubscribeToSelectColorCollection()
+        SubscribeToSendToCartRespone()
+        SubacribeToAddCartButtonAction()
         loadData()
     }
     
@@ -255,7 +262,7 @@ class productDetailsViewController: UIViewController {
             
             let data = self.productdetailsviewmodel.sizeBehaviour.value
             
-            print("Selected Item = \(data[indexpath.row]?.value ?? "")")
+            self.productdetailsviewmodel.pickedSizeBehaviour.accept(data[indexpath.row]?.value ?? nil)
             
             cell?.sizeView.backgroundColor = UIColor().hexStringToUIColor(hex: "#1D1F22")
             cell?.sizeLabel.textColor = UIColor.white
@@ -277,13 +284,37 @@ class productDetailsViewController: UIViewController {
             
             let data = self.productdetailsviewmodel.ColorBehaviour.value
             
-            print("Selected Item = \(data[indexpath.row]?.displayValue ?? "")")
+            self.productdetailsviewmodel.pickedColorBehaviour.accept(data[indexpath.row]?.displayValue ?? nil)
             
             cell?.sizeView.layer.borderColor = UIColor().hexStringToUIColor(hex: "#5ECE7B").cgColor
             cell?.sizeView.layer.borderWidth = 2
             
         }).disposed(by: disposebag)
         
+    }
+    
+    func SubscribeToSendToCartRespone() {
+        productdetailsviewmodel.SavedResponseBehaviourObserval.subscribe(onNext: { [weak self] response in
+            guard let self = self else { return }
+            
+            if response == "Success" {
+                self.delegate.sendToBack(flag: true)
+                self.dismiss(animated: true)
+            }
+            else {
+                print("Error in Saving \(response)")
+                self.delegate.sendToBack(flag: false)
+            }
+        }).disposed(by: disposebag)
+    }
+    
+    func SubacribeToAddCartButtonAction() {
+        AddCartButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.productdetailsviewmodel.SaveDataToCart()
+            
+        }).disposed(by: disposebag)
     }
     
     func loadData() {

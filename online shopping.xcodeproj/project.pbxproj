@@ -14,6 +14,8 @@
 		D39086942865D03600F18416 /* calls.graphql in Resources */ = {isa = PBXBuildFile; fileRef = D39086932865D03600F18416 /* calls.graphql */; };
 		D39086982865D43300F18416 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086972865D43200F18416 /* API.swift */; };
 		D390869A2865D4C300F18416 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39086992865D4C300F18416 /* BaseUrl.swift */; };
+		D3A2BADC28690B67009D2D57 /* cartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2BADB28690B67009D2D57 /* cartModel.swift */; };
+		D3A2BADE28690DAA009D2D57 /* RealmSwiftLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2BADD28690DAA009D2D57 /* RealmSwiftLayer.swift */; };
 		D3B1DA6C28649DBE0001FE35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */; };
 		D3B1DA7028649DBE0001FE35 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */; };
 		D3B1DA7328649DBE0001FE35 /* products.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B1DA7128649DBE0001FE35 /* products.storyboard */; };
@@ -64,6 +66,8 @@
 		D39086932865D03600F18416 /* calls.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = calls.graphql; sourceTree = "<group>"; };
 		D39086972865D43200F18416 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = "online shopping/API.swift"; sourceTree = SOURCE_ROOT; };
 		D39086992865D4C300F18416 /* BaseUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
+		D3A2BADB28690B67009D2D57 /* cartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cartModel.swift; sourceTree = "<group>"; };
+		D3A2BADD28690DAA009D2D57 /* RealmSwiftLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSwiftLayer.swift; sourceTree = "<group>"; };
 		D3B1DA6828649DBE0001FE35 /* online shopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "online shopping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B1DA6B28649DBE0001FE35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3B1DA6F28649DBE0001FE35 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 		D3B1DABA2864C4560001FE35 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D3A2BADD28690DAA009D2D57 /* RealmSwiftLayer.swift */,
 				D3B1DAB32864BA140001FE35 /* color.swift */,
 			);
 			path = Extension;
@@ -300,6 +305,7 @@
 			children = (
 				D3B1DABC2864C4800001FE35 /* productModel.swift */,
 				D3B1DABE2864C6B30001FE35 /* priceModel.swift */,
+				D3A2BADB28690B67009D2D57 /* cartModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -513,6 +519,8 @@
 				D3B1DAC12864C9DF0001FE35 /* productsViewModel.swift in Sources */,
 				D3B1DAB42864BA140001FE35 /* color.swift in Sources */,
 				D3B93BC928673CBC00E9A2E7 /* productDetailsViewModel.swift in Sources */,
+				D3A2BADE28690DAA009D2D57 /* RealmSwiftLayer.swift in Sources */,
+				D3A2BADC28690B67009D2D57 /* cartModel.swift in Sources */,
 				D3B1DABF2864C6B30001FE35 /* priceModel.swift in Sources */,
 				D3B1DAB82864C20E0001FE35 /* productCell.swift in Sources */,
 				D3EF273C2867574A00EB1F48 /* imageCell.swift in Sources */,

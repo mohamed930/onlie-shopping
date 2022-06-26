@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxGesture
 
-class ProductsViewController: UIViewController {
+class ProductsViewController: UIViewController, representToHomeScreen {
     
     @IBOutlet weak var WomanLabel: UILabel!
     @IBOutlet weak var WomanLine: UIView!
@@ -33,6 +33,7 @@ class ProductsViewController: UIViewController {
     let CellnibName = "productCell"
     let CellIdentifier = "Cell"
     let productviewmodel = productsViewModel()
+    static var no = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +140,8 @@ class ProductsViewController: UIViewController {
                 
                 next.productdetailsviewmodel.idBehaviour.accept(branch.id)
                 
+                next.delegate = self
+                
                 next.modalPresentationStyle = .fullScreen
                 
                 self.present(next, animated: true)
@@ -150,5 +153,17 @@ class ProductsViewController: UIViewController {
     
     func FetchDataOperation() {
         productviewmodel.fetchDataOperation()
+    }
+    
+    func sendToBack(flag: Bool) {
+        if flag {
+            BadgeView.isHidden = false
+            ProductsViewController.no += 1
+            numberpfProductsLabel.isHidden = false
+            numberpfProductsLabel.text = String(ProductsViewController.no)
+        }
+        else {
+            BadgeView.isHidden = true
+        }
     }
 }
