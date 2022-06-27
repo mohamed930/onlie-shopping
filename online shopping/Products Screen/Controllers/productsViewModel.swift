@@ -21,8 +21,13 @@ class productsViewModel {
     var watcherColthes: GraphQLQueryWatcher<AllproducsWithColthesTagQuery>?
     var techColthes: GraphQLQueryWatcher<AllproducsWithTechTagQuery>?
     
+    var numberofProductBehaviour = BehaviorRelay<Int>(value: 0)
+    
     private func ConvertToArray<T: GraphQLSelectionSet>(data: [T]) {
         var arr = Array<productModel>()
+        
+        let products = FetchDataFormRealm()
+        var flag = false
         
         for i in data {
             let prices = i.resultMap["prices"] as! [[String: Any]]
@@ -34,14 +39,23 @@ class productsViewModel {
                 let element = j["currency"].jsonValue as! [String: String]
                 pricesArr.append(priceModel(amount: j["amount"] as! Double, currency: currencyModel(symbol: element["symbol"]!)))
             }
+            
+            if products.contains(where: {$0.productId == i.resultMap["id"] as! String }) {
+                print("we are here!! \(i.resultMap["id"] as! String)")
+                flag = true
+            }
+            else {
+                flag = false
+            }
 
-            arr.append(productModel(id: i.resultMap["id"] as! String , name: i.resultMap["name"] as! String,inStock: (i.resultMap["inStock"] as! Bool), gallery: i.resultMap["gallery"] as! [String?], prices: pricesArr))
+            arr.append(productModel(id: i.resultMap["id"] as! String , name: i.resultMap["name"] as! String,inStock: (i.resultMap["inStock"] as! Bool), inCart: flag, gallery: i.resultMap["gallery"] as! [String?], prices: pricesArr))
         }
         
         var arr1 = self.productsBehaviour.value
         arr1.removeAll()
         arr1 = arr
         self.productsBehaviour.accept(arr1)
+        numberofProductBehaviour.accept(products.count)
     }
     
     
@@ -98,5 +112,23 @@ class productsViewModel {
             }
         }
         
+    }
+    
+    func FetchDataFormRealm() -> [cartModel] {
+        
+        print(RealmSwiftLayer.realmFileLocation) // Remove it.
+        
+        let produtsInCart: [cartModel] = RealmSwiftLayer.objects()
+        
+       return produtsInCart
+        
+    }
+    
+    func updateInCart(index: Int) {
+        var products = self.productsBehaviour.value
+        
+        products[index].inCart = true
+        
+        productsBehaviour.accept(products)
     }
 }

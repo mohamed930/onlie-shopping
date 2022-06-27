@@ -33,7 +33,6 @@ class ProductsViewController: UIViewController, representToHomeScreen {
     let CellnibName = "productCell"
     let CellIdentifier = "Cell"
     let productviewmodel = productsViewModel()
-    static var no = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +45,7 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         ConfigureCollectionView()
         BindToCollectionView()
         SubscribeToCollectionViewScelection()
+        SubsctibeToCartBadgeCount()
         FetchDataOperation()
     }
     
@@ -139,6 +139,7 @@ class ProductsViewController: UIViewController, representToHomeScreen {
                 let next = story.instantiateViewController(withIdentifier: "productDetailsViewController") as! productDetailsViewController
                 
                 next.productdetailsviewmodel.idBehaviour.accept(branch.id)
+                next.productdetailsviewmodel.productLoactionBehaviour.accept(selectedIndex[1])
                 
                 next.delegate = self
                 
@@ -151,19 +152,35 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         .disposed(by: disposebag)
     }
     
+    func SubsctibeToCartBadgeCount() {
+        productviewmodel.numberofProductBehaviour.asObservable().subscribe { [weak self] (count: Int) in
+            guard let self = self else { return }
+            
+            if count > 0 {
+                self.BadgeView.isHidden = false
+                self.numberpfProductsLabel.isHidden = false
+                self.numberpfProductsLabel.text = String(count)
+            }
+            else {
+                self.BadgeView.isHidden = true
+                self.numberpfProductsLabel.isHidden = true
+            }
+        }.disposed(by: disposebag)
+    }
+    
     func FetchDataOperation() {
         productviewmodel.fetchDataOperation()
     }
     
-    func sendToBack(flag: Bool) {
+    func sendToBack(flag: Bool,location: Int) {
+        print("F: \(location)")
         if flag {
-            BadgeView.isHidden = false
-            ProductsViewController.no += 1
-            numberpfProductsLabel.isHidden = false
-            numberpfProductsLabel.text = String(ProductsViewController.no)
+            let count = productviewmodel.numberofProductBehaviour.value
+            let newcount = count + 1
+            productviewmodel.numberofProductBehaviour.accept(newcount)
+            
+            productviewmodel.updateInCart(index: location)
         }
-        else {
-            BadgeView.isHidden = true
-        }
+        
     }
 }

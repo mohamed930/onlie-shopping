@@ -29,4 +29,10 @@ class RealmSwiftLayer {
         
     }
     // ------------------------------------------------
+    
+    
+    public static func objects<T: Object>() -> [T] {
+//        guard let realm: Realm = self.realm else { return [] }
+        return realm.objects(T.self).filter({!$0.isInvalidated})
+    }
 }

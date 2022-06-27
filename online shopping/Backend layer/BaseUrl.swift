@@ -8,7 +8,7 @@
 import Foundation
 import Apollo
 
-let url = URL(string: "https://54e5-156-221-134-1.eu.ngrok.io/")
+let url = URL(string: "https://e269-156-221-85-119.eu.ngrok.io/")
 let apollo = ApolloClient(url: url!)
 
 

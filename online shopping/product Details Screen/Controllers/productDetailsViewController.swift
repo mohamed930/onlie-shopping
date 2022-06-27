@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol representToHomeScreen {
-    func sendToBack(flag: Bool)
+    func sendToBack(flag: Bool,location: Int)
 }
 
 class productDetailsViewController: UIViewController {
@@ -298,12 +298,12 @@ class productDetailsViewController: UIViewController {
             guard let self = self else { return }
             
             if response == "Success" {
-                self.delegate.sendToBack(flag: true)
+                self.delegate.sendToBack(flag: true,location: self.productdetailsviewmodel.productLoactionBehaviour.value)
                 self.dismiss(animated: true)
             }
             else {
                 print("Error in Saving \(response)")
-                self.delegate.sendToBack(flag: false)
+                self.delegate.sendToBack(flag: false, location: 0)
             }
         }).disposed(by: disposebag)
     }

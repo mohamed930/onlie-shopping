@@ -13,6 +13,7 @@ import Apollo
 class productDetailsViewModel {
     
     var idBehaviour = BehaviorRelay<String>(value: "")
+    var productLoactionBehaviour = BehaviorRelay<Int>(value: 0)
     
     private var productDetailsBehvaiour = BehaviorRelay<ProductDetailsViewQuery.Data.Product?>(value: nil)
     var productDetailsBehaviourObserval: Observable<ProductDetailsViewQuery.Data.Product?> {
@@ -56,8 +57,6 @@ class productDetailsViewModel {
         let uuid = UUID().uuidString
         
         let productData = cartModel(id: uuid, productId: idBehaviour.value, pickedSize: pickedSizeBehaviour.value, pickedColor: pickedColorBehaviour.value)
-        
-        print(RealmSwiftLayer.realmFileLocation) // Remove it.
         
         let response = RealmSwiftLayer.Save(productData)
         

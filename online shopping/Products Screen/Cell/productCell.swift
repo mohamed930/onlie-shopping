@@ -13,6 +13,7 @@ class productCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var inCartLabel: UILabel!
     @IBOutlet weak var outOfStockView: UIView!
     
     @IBOutlet weak var cartButton: UIButton!
@@ -37,11 +38,20 @@ class productCell: UICollectionViewCell {
         
         if product.inStock {
             outOfStockView.isHidden = true
-            cartButton.isHidden = false
+            
+            if product.inCart {
+                cartButton.isHidden = true
+                inCartLabel.isHidden = false
+            }
+            else {
+                cartButton.isHidden = false
+                inCartLabel.isHidden = true
+            }
         }
         else {
             outOfStockView.isHidden = false
             cartButton.isHidden = true
+            inCartLabel.isHidden = true
         }
     }
 }
