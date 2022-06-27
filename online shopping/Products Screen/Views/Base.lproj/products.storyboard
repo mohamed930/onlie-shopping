@@ -157,11 +157,11 @@
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECc-5J-xHd">
-                                <rect key="frame" x="351.66666666666669" y="736" width="12" height="7"/>
+                                <rect key="frame" x="351.66666666666669" y="734.66666666666663" width="12" height="10"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="7" id="ZpN-sG-Jge"/>
+                                    <constraint firstAttribute="height" constant="10" id="ZpN-sG-Jge"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Raleway-Regular" family="Raleway" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Raleway-Regular" family="Raleway" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

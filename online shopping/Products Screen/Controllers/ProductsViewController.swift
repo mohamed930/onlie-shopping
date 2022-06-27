@@ -139,6 +139,13 @@ class ProductsViewController: UIViewController, representToHomeScreen {
                 let next = story.instantiateViewController(withIdentifier: "productDetailsViewController") as! productDetailsViewController
                 
                 next.productdetailsviewmodel.idBehaviour.accept(branch.id)
+                next.productdetailsviewmodel.productInCartBehaviour.accept(branch.inCart)
+                let productsCart: [cartModel] = self.productviewmodel.FetchDataFormRealm()
+                if branch.inCart {
+                    let index = productsCart.firstIndex{$0.productId == branch.id}
+                    next.productdetailsviewmodel.productCartBehaviour.accept(productsCart[index!])
+                }
+
                 next.productdetailsviewmodel.productLoactionBehaviour.accept(selectedIndex[1])
                 
                 next.delegate = self

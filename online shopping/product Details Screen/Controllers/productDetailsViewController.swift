@@ -37,16 +37,24 @@ class productDetailsViewController: UIViewController {
     @IBOutlet weak var productDetailsLabel: WKWebView!
     
     @IBOutlet weak var AddCartButton: UIButton!
+    @IBOutlet weak var countView: UIView!
+    @IBOutlet weak var AddButton: UIButton!
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var countLabel: UILabel!
     
     let disposebag = DisposeBag()
     let productdetailsviewmodel = productDetailsViewModel()
     let nibFileName = "imageCell"
     let SizenibFileName = "sizeCell"
     var delegate: representToHomeScreen!
+    let radiousValue = CGFloat(7)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        AddButton.AddCornerRadiour(radious: radiousValue)
+        minusButton.AddCornerRadiour(radious: radiousValue)
+        
         SubscribeToBackButton()
         subscribeToresponse()
         ConfigureImageCollectionView()
@@ -58,6 +66,8 @@ class productDetailsViewController: UIViewController {
         SubscribeToSelectColorCollection()
         SubscribeToSendToCartRespone()
         SubacribeToAddCartButtonAction()
+        SubscribeToAddButtonAction()
+        SubscribeTominusButtonAction()
         loadData()
     }
     
@@ -157,7 +167,16 @@ class productDetailsViewController: UIViewController {
             
             
             if productDetails.inStock! {
-                self.AddCartButton.isHidden = false
+                if self.productdetailsviewmodel.productInCartBehaviour.value {
+                    self.AddCartButton.isHidden = true
+                    self.countView.isHidden = false
+                    guard let data = self.productdetailsviewmodel.productCartBehaviour.value else { return }
+                    self.countLabel.text = String(data.count)
+                }
+                else {
+                    self.AddCartButton.isHidden = false
+                    self.countView.isHidden = true
+                }
             }
             else {
                 self.AddCartButton.isHidden = true
@@ -217,14 +236,33 @@ class productDetailsViewController: UIViewController {
     }
     
     func SubscribeToSizeCollectionView() {
-        productdetailsviewmodel.sizeBehaviour.bind(to: sizeCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { row, branch , cell in
+        productdetailsviewmodel.sizeBehaviour.bind(to: sizeCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { [weak self] row, branch , cell in
+            guard let self = self else { return }
             cell.ConfigureSizeCell(sizeNumber: (branch?.displayValue)!)
+            
+            guard let prodctData = self.productdetailsviewmodel.productCartBehaviour.value else { return }
+            if prodctData.pickedSize != nil {
+                if branch?.value == prodctData.pickedSize {
+                    cell.sizeView.backgroundColor = UIColor().hexStringToUIColor(hex: "#1D1F22")
+                    cell.sizeLabel.textColor = UIColor.white
+                }
+            }
         }.disposed(by: disposebag)
     }
     
     func SubscribeToColorCollectionView() {
-        productdetailsviewmodel.ColorBehaviour.bind(to: ColorCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { row, branch , cell in
+        productdetailsviewmodel.ColorBehaviour.bind(to: ColorCollectionView.rx.items(cellIdentifier: SizenibFileName, cellType: sizeCell.self)) { [weak self] row, branch , cell in
+            guard let self = self else { return }
             cell.ConfigureColorCell(colorCode: (branch?.value)!)
+            
+            guard let prodctData = self.productdetailsviewmodel.productCartBehaviour.value else { return }
+            if prodctData.pickedColor != nil {
+                if branch?.value == prodctData.pickedColor {
+                    cell.sizeView.layer.borderColor = UIColor().hexStringToUIColor(hex: "#5ECE7B").cgColor
+                    cell.sizeView.layer.borderWidth = 2
+                }
+            }
+            
         }.disposed(by: disposebag)
     }
     
@@ -249,7 +287,14 @@ class productDetailsViewController: UIViewController {
     
     func SubscribeToSelectSizeCollection() {
         
-        sizeCollectionView.rx.itemSelected.subscribe(onNext: { indexpath in
+        sizeCollectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexpath in
+            guard let self = self else { return }
+            
+            let data = self.productdetailsviewmodel.sizeBehaviour.value
+            
+            if self.productdetailsviewmodel.productCartBehaviour.value != nil {
+                self.productdetailsviewmodel.UpdateSizeOperation(data[indexpath.row]?.value ?? nil)
+            }
             
             self.sizeCollectionView.visibleCells.forEach { cell in
                 if let cell = cell as? sizeCell {
@@ -259,8 +304,6 @@ class productDetailsViewController: UIViewController {
             }
             
             let cell = self.sizeCollectionView.cellForItem(at: indexpath) as? sizeCell
-            
-            let data = self.productdetailsviewmodel.sizeBehaviour.value
             
             self.productdetailsviewmodel.pickedSizeBehaviour.accept(data[indexpath.row]?.value ?? nil)
             
@@ -272,7 +315,15 @@ class productDetailsViewController: UIViewController {
     
     func SubscribeToSelectColorCollection() {
      
-        ColorCollectionView.rx.itemSelected.subscribe(onNext: { indexpath in
+        ColorCollectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexpath in
+            
+            guard let self = self else { return }
+            
+            let data = self.productdetailsviewmodel.ColorBehaviour.value
+            
+            if self.productdetailsviewmodel.productCartBehaviour.value != nil {
+                self.productdetailsviewmodel.UpdateColorOperation(data[indexpath.row]?.displayValue ?? nil)
+            }
             
             self.ColorCollectionView.visibleCells.forEach { cell in
                 if let cell = cell as? sizeCell {
@@ -282,7 +333,6 @@ class productDetailsViewController: UIViewController {
             
             let cell = self.ColorCollectionView.cellForItem(at: indexpath) as? sizeCell
             
-            let data = self.productdetailsviewmodel.ColorBehaviour.value
             
             self.productdetailsviewmodel.pickedColorBehaviour.accept(data[indexpath.row]?.displayValue ?? nil)
             
@@ -314,6 +364,18 @@ class productDetailsViewController: UIViewController {
             
             self.productdetailsviewmodel.SaveDataToCart()
             
+        }).disposed(by: disposebag)
+    }
+    
+    func SubscribeToAddButtonAction() {
+        AddButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { _ in
+            self.productdetailsviewmodel.AddAmountAction(self.countLabel, operation: "+")
+        }).disposed(by: disposebag)
+    }
+    
+    func SubscribeTominusButtonAction() {
+        minusButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { _ in
+            self.productdetailsviewmodel.AddAmountAction(self.countLabel, operation: "-")
         }).disposed(by: disposebag)
     }
     

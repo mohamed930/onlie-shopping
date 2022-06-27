@@ -32,7 +32,16 @@ class RealmSwiftLayer {
     
     
     public static func objects<T: Object>() -> [T] {
-//        guard let realm: Realm = self.realm else { return [] }
         return realm.objects(T.self).filter({!$0.isInvalidated})
+    }
+    
+    public static func update(_ block: () -> ()) -> Bool {
+        do {
+            try RealmSwiftLayer.realm.write(block)
+            return true
+        } catch let error {
+            print("Updating failed with error ", error)
+        }
+        return false
     }
 }
