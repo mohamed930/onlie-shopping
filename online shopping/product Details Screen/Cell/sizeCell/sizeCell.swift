@@ -33,5 +33,43 @@ class sizeCell: UICollectionViewCell {
         
         sizeLabel.isHidden = true
     }
+    
+    func ConfigureSizeCell(sizeNumber: SizeModel) {
+        sizeLabel.text = sizeNumber.displayText
+        sizeLabel.isHidden = false
+        
+        if sizeNumber.selected {
+            sizeView.layer.borderColor = UIColor.black.cgColor
+            sizeView.layer.borderWidth = 1
+            
+            sizeView.layer.backgroundColor = UIColor.black.cgColor
+            sizeLabel.textColor = .white
+        }
+        else {
+            sizeView.layer.borderColor = UIColor.black.cgColor
+            sizeView.layer.borderWidth = 1
+            sizeLabel.textColor = .black
+            sizeView.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
+    
+    func ConfigureColorCell(colorCode: SizeModel) {
+        
+        sizeView.layer.backgroundColor = UIColor().hexStringToUIColor(hex: colorCode.value).cgColor
+        
+        sizeView.layer.borderColor = UIColor.clear.cgColor
+        sizeView.layer.borderWidth = 0
+        
+        sizeLabel.isHidden = true
+        
+        if colorCode.selected {
+            sizeView.layer.borderColor = UIColor().hexStringToUIColor(hex: "#5ECE7B").cgColor
+            sizeView.layer.borderWidth = 2
+        }
+        else {
+            sizeView.layer.borderColor = UIColor.clear.cgColor
+            sizeView.layer.borderWidth = 0
+        }
+    }
 
 }

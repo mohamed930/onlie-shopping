@@ -47,6 +47,7 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         SubscribeToCollectionViewScelection()
         SubsctibeToCartBadgeCount()
         FetchDataOperation()
+        SubscribeToCartButtonAction()
     }
     
     func AddTouchRecognizeAction(index: Int,label: UILabel,completion: @escaping (Bool) -> ()) {
@@ -189,5 +190,18 @@ class ProductsViewController: UIViewController, representToHomeScreen {
             productviewmodel.updateInCart(index: location)
         }
         
+    }
+    
+    func SubscribeToCartButtonAction() {
+        cartButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            
+            let story = UIStoryboard(name: "cart", bundle: nil)
+            let nextVc = story.instantiateViewController(withIdentifier: "cartViewController") as! cartViewController
+            nextVc.cartviewmodel.productsInCartBehvaiour.accept(self.productviewmodel.FetchDataFormRealm())
+            nextVc.modalPresentationStyle = .fullScreen
+            self.present(nextVc, animated: true)
+            
+        }).disposed(by: disposebag)
     }
 }
