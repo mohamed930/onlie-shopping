@@ -38,7 +38,7 @@ class cartViewController: UIViewController {
     func ConfiguretableView() {
         tableView.register(UINib(nibName: NibFileName, bundle: nil), forCellReuseIdentifier: NibFileName)
         
-        tableView.rowHeight = CGFloat(255)
+        tableView.rowHeight = CGFloat(265)
     }
     
     func SubscribeToTableView() {
@@ -71,15 +71,7 @@ class cartViewController: UIViewController {
     
     func FetchProduct() {
         cartviewmodel.FetchDataOperation()
-//        ShowPricesAndAmount()
     }
-    
-//    func ShowPricesAndAmount() {
-//        let result = cartviewmodel.SetCartValues()
-//        QuantityLabel.text = "Quantity: " + String(result.y)
-//        totalLabel.text = "Total: " + String(result.x)
-//        taxLabel.text = "Tax 21%: " + String(21/100 * result.x)
-//    }
     
     func SubscribeToBackButtonAction() {
         BackButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in

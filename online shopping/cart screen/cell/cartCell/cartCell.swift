@@ -127,7 +127,7 @@ class cartCell: UITableViewCell {
         SizeCollectionView.register(UINib(nibName: SizeNibfileName, bundle: nil), forCellWithReuseIdentifier: SizeNibfileName)
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 10, right: 0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 0)
         
         
         flowLayout.scrollDirection = .horizontal
