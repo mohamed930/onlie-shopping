@@ -55,7 +55,12 @@ class productsViewModel {
         arr1.removeAll()
         arr1 = arr
         self.productsBehaviour.accept(arr1)
-        numberofProductBehaviour.accept(products.count)
+        
+        var count = 0
+        for i in products {
+            count += i.count
+        }
+        numberofProductBehaviour.accept(count)
     }
     
     

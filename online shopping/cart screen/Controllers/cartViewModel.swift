@@ -90,7 +90,7 @@ class cartViewModel {
         }
     }
     
-    func scrollToNextCell(collectionView: UICollectionView, action: String){
+    func scrollToNextCell(collectionView: UICollectionView, action: String) {
 
         //get cell size
         let cellSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height);
@@ -106,5 +106,16 @@ class cartViewModel {
             //scroll to prev cell
             collectionView.scrollRectToVisible(CGRect(x: contentOffset.x - cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
         }
+    }
+    
+    func SetCartValues(cart: [productcartModel]) -> (x:Double,y:Int) {
+        var sum = 0.0
+        var amount = 0
+        for i in cart {
+            sum += Double(i.productPrice)!
+            amount += Int(i.productAmount)!
+        }
+        
+        return (sum,amount)
     }
 }

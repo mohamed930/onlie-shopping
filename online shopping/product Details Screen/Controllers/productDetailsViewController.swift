@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol representToHomeScreen {
-    func sendToBack(flag: Bool,location: Int)
+    func sendToBack(flag: Bool,location: Int,count: Int,action: Bool)
 }
 
 class productDetailsViewController: UIViewController {
@@ -48,6 +48,7 @@ class productDetailsViewController: UIViewController {
     let SizenibFileName = "sizeCell"
     var delegate: representToHomeScreen!
     let radiousValue = CGFloat(7)
+    var productcount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +75,20 @@ class productDetailsViewController: UIViewController {
     func SubscribeToBackButton() {
         BackButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
+            
+            var minus = false
+            
+            if (Int(self.countLabel.text!)! > self.productcount) {
+                self.productcount = Int(self.countLabel.text!)! - self.productcount
+                minus = true
+                
+            }
+            else {
+                self.productcount = self.productcount - Int(self.countLabel.text!)!
+                minus = false
+            }
+            
+            self.delegate.sendToBack(flag: true, location: self.productdetailsviewmodel.productLoactionBehaviour.value, count: self.productcount,action: minus)
             
             self.dismiss(animated: true)
             
@@ -172,6 +187,7 @@ class productDetailsViewController: UIViewController {
                     self.countView.isHidden = false
                     guard let data = self.productdetailsviewmodel.productCartBehaviour.value else { return }
                     self.countLabel.text = String(data.count)
+                    self.productcount = data.count
                 }
                 else {
                     self.AddCartButton.isHidden = false
@@ -348,12 +364,12 @@ class productDetailsViewController: UIViewController {
             guard let self = self else { return }
             
             if response == "Success" {
-                self.delegate.sendToBack(flag: true,location: self.productdetailsviewmodel.productLoactionBehaviour.value)
+                self.delegate.sendToBack(flag: true,location: self.productdetailsviewmodel.productLoactionBehaviour.value,count: 1, action: true)
                 self.dismiss(animated: true)
             }
             else {
                 print("Error in Saving \(response)")
-                self.delegate.sendToBack(flag: false, location: 0)
+                self.delegate.sendToBack(flag: false, location: 0,count: 0, action: false)
             }
         }).disposed(by: disposebag)
     }

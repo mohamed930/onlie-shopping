@@ -180,11 +180,18 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         productviewmodel.fetchDataOperation()
     }
     
-    func sendToBack(flag: Bool,location: Int) {
+    func sendToBack(flag: Bool,location: Int,count: Int,action: Bool) {
         print("F: \(location)")
         if flag {
-            let count = productviewmodel.numberofProductBehaviour.value
-            let newcount = count + 1
+            let ccount = productviewmodel.numberofProductBehaviour.value
+            var newcount = 0
+            if action {
+                newcount = ccount + count
+            }
+            else {
+                newcount = ccount - count
+            }
+            
             productviewmodel.numberofProductBehaviour.accept(newcount)
             
             productviewmodel.updateInCart(index: location)

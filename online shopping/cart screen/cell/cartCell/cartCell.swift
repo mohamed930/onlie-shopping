@@ -157,7 +157,7 @@ class cartCell: UITableViewCell {
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 0
         
-        flowLayout.itemSize = CGSize(width: ColorCollectionView.frame.size.height - 5, height: SizeCollectionView.frame.size.height - 5)
+        flowLayout.itemSize = CGSize(width: ColorCollectionView.frame.size.height, height: SizeCollectionView.frame.size.height)
         
         ColorCollectionView.collectionViewLayout = flowLayout
     }

@@ -30,7 +30,9 @@ class cartViewController: UIViewController {
 
         ConfiguretableView()
         SubscribeToTableView()
+        SubscrbieToResponse()
         FetchProduct()
+        SubscribeToBackButtonAction()
     }
     
     func ConfiguretableView() {
@@ -55,8 +57,35 @@ class cartViewController: UIViewController {
         }.disposed(by: dispossebag)
     }
     
+    func SubscrbieToResponse() {
+        cartviewmodel.productsCarBehvaiourObserval.subscribe { [weak self] carts in
+            guard let self = self else { return }
+            guard let carts = carts.element else { return }
+            let result = self.cartviewmodel.SetCartValues(cart: carts)
+            
+            self.QuantityLabel.text = "Quantity: " + String(result.y)
+            self.totalLabel.text = "Total: " + String(result.x)
+            self.taxLabel.text = "Tax 21%: " + String(round(21 * result.x) / 100)
+        }.disposed(by: dispossebag)
+    }
+    
     func FetchProduct() {
         cartviewmodel.FetchDataOperation()
+//        ShowPricesAndAmount()
+    }
+    
+//    func ShowPricesAndAmount() {
+//        let result = cartviewmodel.SetCartValues()
+//        QuantityLabel.text = "Quantity: " + String(result.y)
+//        totalLabel.text = "Total: " + String(result.x)
+//        taxLabel.text = "Tax 21%: " + String(21/100 * result.x)
+//    }
+    
+    func SubscribeToBackButtonAction() {
+        BackButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }).disposed(by: dispossebag)
     }
     
 }
