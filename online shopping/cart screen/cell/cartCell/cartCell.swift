@@ -42,6 +42,14 @@ class cartCell: UITableViewCell {
     var perviousImageButtonObserval : Observable<Void>{
         return self.decrementImageButton.rx.tap.throttle(.milliseconds(1000), scheduler: MainScheduler.instance).asObservable()
     }
+    
+    var incerementButtonObserval : Observable<Void>{
+        return self.incrementButton.rx.tap.throttle(.milliseconds(1000), scheduler: MainScheduler.instance).asObservable()
+    }
+    
+    var decerementButtonObserval : Observable<Void>{
+        return self.decrementButton.rx.tap.throttle(.milliseconds(1000), scheduler: MainScheduler.instance).asObservable()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

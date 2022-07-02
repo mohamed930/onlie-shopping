@@ -19,6 +19,11 @@ class cartViewModel {
         return productsCarBehvaiour.asObservable()
     }
     
+    private var totalBehaviour = BehaviorRelay<totalModel?>(value: nil)
+    var totalBehaviourObservsl: Observable<totalModel?> {
+        return totalBehaviour.asObservable()
+    }
+    
     var watcher: GraphQLQueryWatcher<ProductDetailsViewQuery>?
     
     
@@ -80,6 +85,7 @@ class cartViewModel {
                     
                     if productsCart.count == self.productsInCartBehvaiour.value.count {
                         self.productsCarBehvaiour.accept(productsCart)
+                        self.SetCartValues()
                         break
                     }
                     
@@ -108,7 +114,9 @@ class cartViewModel {
         }
     }
     
-    func SetCartValues(cart: [productcartModel]) -> (x:Double,y:Int) {
+    func SetCartValues() {
+        let cart = productsCarBehvaiour.value
+        
         var sum = 0.0
         var amount = 0
         for i in cart {
@@ -116,6 +124,48 @@ class cartViewModel {
             amount += Int(i.productAmount)!
         }
         
-        return (sum,amount)
+        let ob = totalModel(totalAmount: String(sum), taxAmount: String(round(21*sum) / 100), productAmount: String(amount))
+        totalBehaviour.accept(ob)
+    }
+    
+    func incrementAmountOperation (cartproduct: String, cartPrice: String) -> Int {
+        let product = productsInCartBehvaiour.value
+        
+        var oldcount = 0
+        var ob: cartModel!
+        
+        for i in product {
+            if i.productId == cartproduct {
+                ob = i
+                oldcount = i.count
+                break
+            }
+        }
+        
+        oldcount += 1
+        
+        let result = RealmSwiftLayer.update {
+            guard let ob = ob else { return }
+            ob.count = oldcount
+        }
+        
+        if result {
+            let total = totalBehaviour.value
+            
+            let tamount = String(1 + Int((total?.productAmount)!)!)
+            
+            let oldTotal = Double(total!.totalAmount)!
+            let tprice = String(round(oldTotal) + Double(cartPrice)!)
+            
+            let r = round(Double((total?.totalAmount)!)! * 21) / 100
+            let result = String(r)
+            
+            let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
+            totalBehaviour.accept(ob)
+            return oldcount
+        }
+        else {
+            return 0
+        }
     }
 }
