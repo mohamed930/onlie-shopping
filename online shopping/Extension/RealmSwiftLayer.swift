@@ -44,4 +44,18 @@ class RealmSwiftLayer {
         }
         return false
     }
+    
+    public static func delete<T: Object>(_ object: T) -> Bool {
+        guard !object.isInvalidated else { return true }
+        
+        do {
+            try realm.write {
+                realm.delete(object)
+            }
+            return true
+        } catch let error {
+            print("Writing of array failed for ", String(describing: T.self), " with error ", error)
+        }
+        return false
+    }
 }

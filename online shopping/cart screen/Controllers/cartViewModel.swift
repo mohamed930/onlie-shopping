@@ -128,7 +128,7 @@ class cartViewModel {
         totalBehaviour.accept(ob)
     }
     
-    func incrementAmountOperation (cartproduct: String, cartPrice: String) -> Int {
+    func incrementAmountOperation (cartproduct: String, cartPrice: String, operation: Character, indexPath: IndexPath) -> Int {
         let product = productsInCartBehvaiour.value
         
         var oldcount = 0
@@ -142,7 +142,12 @@ class cartViewModel {
             }
         }
         
-        oldcount += 1
+        if operation == "+" {
+            oldcount += 1
+        }
+        else {
+            oldcount -= 1
+        }
         
         let result = RealmSwiftLayer.update {
             guard let ob = ob else { return }
@@ -152,20 +157,60 @@ class cartViewModel {
         if result {
             let total = totalBehaviour.value
             
-            let tamount = String(1 + Int((total?.productAmount)!)!)
+            if operation == "+" {
+                let tamount = String(1 + Int((total?.productAmount)!)!)
+                
+                let oldTotal = Double(total!.totalAmount)!
+                let tprice = String(round(oldTotal) + Double(cartPrice)!)
+                
+                let r = round(Double((total?.totalAmount)!)! * 21) / 100
+                let result = String(r)
+                
+                let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
+                totalBehaviour.accept(ob)
+            }
+            else {
+                let tamount = String(Int((total?.productAmount)!)! - 1)
+                
+                if oldcount <= 0 {
+                    // Remove the product and reamove from Realmswift.
+                    _ = RealmSwiftLayer.delete(ob)
+                    removeItem(at: indexPath)
+                }
+                else {
+                    let oldTotal = Double(total!.totalAmount)!
+                    var tprice = ""
+                    
+                    if oldTotal > Double(cartPrice)! {
+                        tprice = String(round(oldTotal) - Double(cartPrice)!)
+                    }
+                    else {
+                        tprice = String(Double(cartPrice)! - round(oldTotal))
+                    }
+                    
+                    let r = round(Double((total?.totalAmount)!)! * 21) / 100
+                    let result = String(r)
+                    
+                    let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
+                    totalBehaviour.accept(ob)
+                }
+            }
             
-            let oldTotal = Double(total!.totalAmount)!
-            let tprice = String(round(oldTotal) + Double(cartPrice)!)
-            
-            let r = round(Double((total?.totalAmount)!)! * 21) / 100
-            let result = String(r)
-            
-            let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
-            totalBehaviour.accept(ob)
             return oldcount
         }
         else {
             return 0
         }
     }
+    
+    // MARK:- TODO:- This Method For Delete Cell from Array tableView.
+    private func removeItem(at indexPath: IndexPath) {
+        
+        var sections = productsCarBehvaiour.value
+        
+        sections.remove(at: indexPath.row)
+
+        productsCarBehvaiour.accept(sections)
+    }
+    // ------------------------------------------------
 }
