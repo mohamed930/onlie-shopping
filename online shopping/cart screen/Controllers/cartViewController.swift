@@ -55,7 +55,7 @@ class cartViewController: UIViewController {
             }).disposed(by: self.dispossebag)
             
             cell.incerementButtonObserval.subscribe(onNext: { [weak self] _ in
-                let count = self?.cartviewmodel.incrementAmountOperation(cartproduct: branch.productId, cartPrice: branch.productPrice, operation: "+", indexPath: IndexPath(row: row, section: 0))
+                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "+")
                 cell.productamountLabel.text = String(count!)
             }).disposed(by: self.dispossebag)
             
@@ -78,16 +78,6 @@ class cartViewController: UIViewController {
             self.taxLabel.text = "Tax 21%: " + total.taxAmount
             
         }).disposed(by: dispossebag)
-        
-//        cartviewmodel.productsCarBehvaiourObserval.subscribe { [weak self] carts in
-//            guard let self = self else { return }
-//            guard let carts = carts.element else { return }
-//            let result = self.cartviewmodel.SetCartValues(cart: carts)
-//
-//            self.QuantityLabel.text = "Quantity: " + String(result.y)
-//            self.totalLabel.text = "Total: " + String(result.x)
-//            self.taxLabel.text = "Tax 21%: " + String(round(21 * result.x) / 100)
-//        }.disposed(by: dispossebag)
     }
     
     func FetchProduct() {

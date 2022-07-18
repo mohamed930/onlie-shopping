@@ -96,6 +96,8 @@ class cartViewModel {
         }
     }
     
+    
+    
     func scrollToNextCell(collectionView: UICollectionView, action: String) {
 
         //get cell size
@@ -114,19 +116,26 @@ class cartViewModel {
         }
     }
     
+    
+    
     func SetCartValues() {
         let cart = productsCarBehvaiour.value
         
         var sum = 0.0
         var amount = 0
         for i in cart {
-            sum += Double(i.productPrice)!
+            sum += Double(Double(i.productAmount)! * Double(i.productPrice)!)
             amount += Int(i.productAmount)!
         }
         
-        let ob = totalModel(totalAmount: String(sum), taxAmount: String(round(21*sum) / 100), productAmount: String(amount))
+        let tax = round(21*sum) / 100
+        let totalAmountWithTax = tax + sum
+        
+        let ob = totalModel(totalAmount: String(format: "%0.2f", totalAmountWithTax), taxAmount: String(tax), productAmount: String(amount), productAmountWithoutTax: String(sum))
         totalBehaviour.accept(ob)
     }
+    
+    
     
     func incrementAmountOperation (cartproduct: String, cartPrice: String, operation: Character, indexPath: IndexPath) -> Int {
         let product = productsInCartBehvaiour.value
@@ -166,7 +175,7 @@ class cartViewModel {
                 let r = round(Double((total?.totalAmount)!)! * 21) / 100
                 let result = String(r)
                 
-                let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
+                let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount, productAmountWithoutTax: "")
                 totalBehaviour.accept(ob)
             }
             else {
@@ -191,7 +200,7 @@ class cartViewModel {
                     let r = round(Double((total?.totalAmount)!)! * 21) / 100
                     let result = String(r)
                     
-                    let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount)
+                    let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount, productAmountWithoutTax: "")
                     totalBehaviour.accept(ob)
                 }
             }
@@ -202,6 +211,43 @@ class cartViewModel {
             return 0
         }
     }
+    
+    func incrementAmountOperation(ob: productcartModel, operation: Character) -> Int {
+        if operation == "+" {
+            // first update in database
+            let product = productsInCartBehvaiour.value
+            let index = product.firstIndex { $0.productId == ob.productId }!
+            let Choocedproduct = product[index]
+            let newcount = Choocedproduct.count + 1
+            let result = RealmSwiftLayer.update {
+                Choocedproduct.count = newcount
+            }
+    
+            
+            if result {
+                // update in total
+                guard var oldtotal = totalBehaviour.value else { return 0}
+                
+                let totalprice = Double(oldtotal.productAmountWithoutTax)! + Double(ob.productPrice)!
+                let totaltax = 21 * totalprice / 100
+                let totalPriceAfterTax = totalprice + totaltax
+                
+                oldtotal.productAmount = String(Int(oldtotal.productAmount)! + 1)
+                oldtotal.totalAmount   = String(format: "%0.2f", totalPriceAfterTax)
+                oldtotal.taxAmount     = String(format: "%0.2f", totaltax)
+                oldtotal.productAmountWithoutTax = String(format: "%0.2f", totalprice)
+                self.totalBehaviour.accept(oldtotal)
+                
+                // update in UI in cell
+                return newcount
+            }
+            
+        }
+        
+        return 0
+    }
+    
+    
     
     // MARK:- TODO:- This Method For Delete Cell from Array tableView.
     private func removeItem(at indexPath: IndexPath) {

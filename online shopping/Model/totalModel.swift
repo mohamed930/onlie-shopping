@@ -11,4 +11,5 @@ struct totalModel {
     var totalAmount: String
     var taxAmount: String
     var productAmount: String
+    var productAmountWithoutTax: String
 }

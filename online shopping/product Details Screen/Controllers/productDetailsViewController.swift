@@ -49,6 +49,7 @@ class productDetailsViewController: UIViewController {
     var delegate: representToHomeScreen!
     let radiousValue = CGFloat(7)
     var productcount = 0
+    var flag = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,19 +77,21 @@ class productDetailsViewController: UIViewController {
         BackButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
             
-            var minus = false
-            
-            if (Int(self.countLabel.text!)! > self.productcount) {
-                self.productcount = Int(self.countLabel.text!)! - self.productcount
-                minus = true
+            if self.flag {
+                var minus = false
                 
+                if (Int(self.countLabel.text!)! > self.productcount) {
+                    self.productcount = Int(self.countLabel.text!)! - self.productcount
+                    minus = true
+                    
+                }
+                else {
+                    self.productcount = self.productcount - Int(self.countLabel.text!)!
+                    minus = false
+                }
+                
+                self.delegate.sendToBack(flag: true, location: self.productdetailsviewmodel.productLoactionBehaviour.value, count: self.productcount,action: minus)
             }
-            else {
-                self.productcount = self.productcount - Int(self.countLabel.text!)!
-                minus = false
-            }
-            
-            self.delegate.sendToBack(flag: true, location: self.productdetailsviewmodel.productLoactionBehaviour.value, count: self.productcount,action: minus)
             
             self.dismiss(animated: true)
             
@@ -385,12 +388,14 @@ class productDetailsViewController: UIViewController {
     
     func SubscribeToAddButtonAction() {
         AddButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { _ in
+            self.flag = true
             self.productdetailsviewmodel.AddAmountAction(self.countLabel, operation: "+")
         }).disposed(by: disposebag)
     }
     
     func SubscribeTominusButtonAction() {
         minusButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { _ in
+            self.flag = true
             self.productdetailsviewmodel.AddAmountAction(self.countLabel, operation: "-")
         }).disposed(by: disposebag)
     }
