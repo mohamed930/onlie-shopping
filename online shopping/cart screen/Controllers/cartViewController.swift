@@ -55,12 +55,12 @@ class cartViewController: UIViewController {
             }).disposed(by: self.dispossebag)
             
             cell.incerementButtonObserval.subscribe(onNext: { [weak self] _ in
-                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "+")
+                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "+",index: row)
                 cell.productamountLabel.text = String(count!)
             }).disposed(by: self.dispossebag)
             
             cell.decerementButtonObserval.subscribe(onNext: { [weak self] _ in
-                let count = self?.cartviewmodel.incrementAmountOperation(cartproduct: branch.productId, cartPrice: branch.productPrice, operation: "-", indexPath: IndexPath(row: row, section: 0))
+                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "-",index: row)
                 cell.productamountLabel.text = String(count!)
             }).disposed(by: self.dispossebag)
             

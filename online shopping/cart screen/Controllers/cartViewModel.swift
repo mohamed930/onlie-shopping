@@ -136,125 +136,101 @@ class cartViewModel {
     }
     
     
-    
-    func incrementAmountOperation (cartproduct: String, cartPrice: String, operation: Character, indexPath: IndexPath) -> Int {
+    func incrementAmountOperation(ob: productcartModel, operation: Character,index: Int) -> Int {
+        
         let product = productsInCartBehvaiour.value
+        let index = product.firstIndex { $0.productId == ob.productId }!
+        let Choocedproduct = product[index]
         
-        var oldcount = 0
-        var ob: cartModel!
-        
-        for i in product {
-            if i.productId == cartproduct {
-                ob = i
-                oldcount = i.count
-                break
-            }
-        }
-        
-        if operation == "+" {
-            oldcount += 1
-        }
-        else {
-            oldcount -= 1
-        }
-        
-        let result = RealmSwiftLayer.update {
-            guard let ob = ob else { return }
-            ob.count = oldcount
-        }
-        
-        if result {
-            let total = totalBehaviour.value
-            
-            if operation == "+" {
-                let tamount = String(1 + Int((total?.productAmount)!)!)
-                
-                let oldTotal = Double(total!.totalAmount)!
-                let tprice = String(round(oldTotal) + Double(cartPrice)!)
-                
-                let r = round(Double((total?.totalAmount)!)! * 21) / 100
-                let result = String(r)
-                
-                let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount, productAmountWithoutTax: "")
-                totalBehaviour.accept(ob)
-            }
-            else {
-                let tamount = String(Int((total?.productAmount)!)! - 1)
-                
-                if oldcount <= 0 {
-                    // Remove the product and reamove from Realmswift.
-                    _ = RealmSwiftLayer.delete(ob)
-                    removeItem(at: indexPath)
-                }
-                else {
-                    let oldTotal = Double(total!.totalAmount)!
-                    var tprice = ""
-                    
-                    if oldTotal > Double(cartPrice)! {
-                        tprice = String(round(oldTotal) - Double(cartPrice)!)
-                    }
-                    else {
-                        tprice = String(Double(cartPrice)! - round(oldTotal))
-                    }
-                    
-                    let r = round(Double((total?.totalAmount)!)! * 21) / 100
-                    let result = String(r)
-                    
-                    let ob = totalModel(totalAmount: tprice, taxAmount: result, productAmount: tamount, productAmountWithoutTax: "")
-                    totalBehaviour.accept(ob)
-                }
-            }
-            
-            return oldcount
-        }
-        else {
-            return 0
-        }
-    }
-    
-    func incrementAmountOperation(ob: productcartModel, operation: Character) -> Int {
         if operation == "+" {
             // first update in database
-            let product = productsInCartBehvaiour.value
-            let index = product.firstIndex { $0.productId == ob.productId }!
-            let Choocedproduct = product[index]
             let newcount = Choocedproduct.count + 1
-            let result = RealmSwiftLayer.update {
-                Choocedproduct.count = newcount
-            }
-    
             
-            if result {
-                // update in total
-                guard var oldtotal = totalBehaviour.value else { return 0}
+            // Update Total and RealmDatabse.
+            UpdateInDatabaseAndUITotal(operation: "+", productCart: Choocedproduct, newcount: newcount, productPrice: ob.productPrice)
+            
+            // update in UI in cell
+            return newcount
+            
+        }
+        else {
+            // first update in database
+            let newcount = Choocedproduct.count - 1
+            
+            if newcount == 0 {
+                // remove element from RealmSwift Database
+                let result = RealmSwiftLayer.delete(Choocedproduct)
                 
-                let totalprice = Double(oldtotal.productAmountWithoutTax)! + Double(ob.productPrice)!
-                let totaltax = 21 * totalprice / 100
-                let totalPriceAfterTax = totalprice + totaltax
-                
-                oldtotal.productAmount = String(Int(oldtotal.productAmount)! + 1)
-                oldtotal.totalAmount   = String(format: "%0.2f", totalPriceAfterTax)
-                oldtotal.taxAmount     = String(format: "%0.2f", totaltax)
-                oldtotal.productAmountWithoutTax = String(format: "%0.2f", totalprice)
-                self.totalBehaviour.accept(oldtotal)
+                if result {
+                    // remove element from tableViewUI.
+                    print("F: row Selected \(index)")
+                    removeItem(at: ob)
+                    
+                    // updateInDataAndUITotal
+                    UpdateInDatabaseAndUITotal(operation: "-", productCart: Choocedproduct, newcount: 0, productPrice: ob.productPrice)
+                    
+                    return 0
+                    
+                }
+            }
+            else {
+                // Update Total and RealmDatabse.
+                UpdateInDatabaseAndUITotal(operation: "-", productCart: Choocedproduct, newcount: newcount, productPrice: ob.productPrice)
                 
                 // update in UI in cell
                 return newcount
             }
-            
         }
         
         return 0
     }
     
+    // we need operation to chooce logic - productCart to update element in RealmSwift - newcount to update the amount in Realmswift - productPrice to inceremt or decremnt the total price with picked product price.
+    private func UpdateInDatabaseAndUITotal(operation: Character,productCart: cartModel, newcount: Int, productPrice: String) {
+        var result = false
+        if newcount != 0 {
+            // Update Count in RealmDatabase.
+            result = RealmSwiftLayer.update {
+                productCart.count = newcount
+            }
+        }
+        
+        if result  || newcount == 0 {
+            guard var oldtotal = totalBehaviour.value else { return }
+            
+            var totalprice = Double()
+            var totalAmount = Int()
+            
+            // check the operation to increment the totalAmount or decrement it.
+            if operation == "+" {
+                totalprice = Double(oldtotal.productAmountWithoutTax)! + Double(productPrice)!
+                totalAmount = Int(oldtotal.productAmount)! + 1
+            }
+            else {
+                totalprice = Double(oldtotal.productAmountWithoutTax)! - Double(productPrice)!
+                totalAmount = Int(oldtotal.productAmount)! - 1
+            }
+            
+            // update in total
+            let totaltax = 21 * totalprice / 100
+            let totalPriceAfterTax = totalprice + totaltax
+            
+            oldtotal.productAmount = String(totalAmount)
+            oldtotal.totalAmount   = String(format: "%0.2f", totalPriceAfterTax)
+            oldtotal.taxAmount     = String(format: "%0.2f", totaltax)
+            oldtotal.productAmountWithoutTax = String(format: "%0.2f", totalprice)
+            totalBehaviour.accept(oldtotal)
+        }
+    }
     
-    
-    // MARK:- TODO:- This Method For Delete Cell from Array tableView.
-    private func removeItem(at indexPath: IndexPath) {
+    // MARK: TODO: This Method For Delete Cell from Array tableView.
+    private func removeItem(at indexPath: productcartModel) {
         
         var sections = productsCarBehvaiour.value
         
-        sections.remove(at: indexPath.row)
+        let index = sections.firstIndex { $0.productId == indexPath.productId }!
+        
+        sections.remove(at: index)
 
         productsCarBehvaiour.accept(sections)
     }
