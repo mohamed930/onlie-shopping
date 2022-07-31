@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol CountdataPassBack {
+    func FetchtotalCount(totalCount: String)
+}
+
 class cartViewController: UIViewController {
     
     @IBOutlet weak var BackButton: UIButton!
@@ -24,6 +28,9 @@ class cartViewController: UIViewController {
     let cartviewmodel = cartViewModel()
     let dispossebag = DisposeBag()
     let NibFileName = "cartCell"
+    var flag = false
+    var totalAmount = ""
+    var delegate: CountdataPassBack?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +62,15 @@ class cartViewController: UIViewController {
             }).disposed(by: self.dispossebag)
             
             cell.incerementButtonObserval.subscribe(onNext: { [weak self] _ in
-                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "+",index: row)
+                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "+")
                 cell.productamountLabel.text = String(count!)
+                self?.flag = true
             }).disposed(by: self.dispossebag)
             
             cell.decerementButtonObserval.subscribe(onNext: { [weak self] _ in
-                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "-",index: row)
+                let count = self?.cartviewmodel.incrementAmountOperation(ob: branch, operation: "-")
                 cell.productamountLabel.text = String(count!)
+                self?.flag = true
             }).disposed(by: self.dispossebag)
             
         }.disposed(by: dispossebag)
@@ -72,6 +81,8 @@ class cartViewController: UIViewController {
         cartviewmodel.totalBehaviourObservsl.subscribe(onNext: { [weak self] total in
             guard let total = total else { return }
             guard let self = self else { return }
+            
+            self.totalAmount = total.productAmount
             
             self.QuantityLabel.text = "Quantity: " + total.productAmount
             self.totalLabel.text = "Total: " + total.totalAmount
@@ -87,6 +98,11 @@ class cartViewController: UIViewController {
     func SubscribeToBackButtonAction() {
         BackButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
+            print("F: \(self.flag)")
+            if self.flag {
+                self.delegate?.FetchtotalCount(totalCount: self.totalAmount)
+            }
+            
             self.dismiss(animated: true)
         }).disposed(by: dispossebag)
     }

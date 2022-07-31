@@ -136,7 +136,7 @@ class cartViewModel {
     }
     
     
-    func incrementAmountOperation(ob: productcartModel, operation: Character,index: Int) -> Int {
+    func incrementAmountOperation(ob: productcartModel, operation: Character) -> Int {
         
         let product = productsInCartBehvaiour.value
         let index = product.firstIndex { $0.productId == ob.productId }!
@@ -168,6 +168,9 @@ class cartViewModel {
                     
                     // updateInDataAndUITotal
                     UpdateInDatabaseAndUITotal(operation: "-", productCart: Choocedproduct, newcount: 0, productPrice: ob.productPrice)
+                    
+                    // Send Notification Center to the Home Page
+                    NotificationCenter.default.post(name: Notification.Name("DeleteItem"), object: nil)
                     
                     return 0
                     

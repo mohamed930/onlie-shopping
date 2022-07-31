@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxGesture
 
-class ProductsViewController: UIViewController, representToHomeScreen {
+class ProductsViewController: UIViewController, representToHomeScreen , CountdataPassBack {
     
     @IBOutlet weak var WomanLabel: UILabel!
     @IBOutlet weak var WomanLine: UIView!
@@ -47,6 +47,7 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         SubscribeToCollectionViewScelection()
         SubsctibeToCartBadgeCount()
         FetchDataOperation()
+        FetchNotificationCenter()
         SubscribeToCartButtonAction()
     }
     
@@ -180,6 +181,10 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         productviewmodel.fetchDataOperation()
     }
     
+    func FetchNotificationCenter() {
+        productviewmodel.FetchTheNotificationFormUser()
+    }
+    
     func sendToBack(flag: Bool,location: Int,count: Int,action: Bool) {
         print("F: \(location)")
         if flag {
@@ -199,6 +204,15 @@ class ProductsViewController: UIViewController, representToHomeScreen {
         
     }
     
+    func FetchtotalCount(totalCount: String) {
+        print(totalCount)
+        guard let totalAmount = Int(totalCount) else {
+            print("Error in Converting")
+            return
+        }
+        productviewmodel.numberofProductBehaviour.accept(totalAmount)
+    }
+    
     func SubscribeToCartButtonAction() {
         cartButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
@@ -207,6 +221,7 @@ class ProductsViewController: UIViewController, representToHomeScreen {
             let nextVc = story.instantiateViewController(withIdentifier: "cartViewController") as! cartViewController
             nextVc.cartviewmodel.productsInCartBehvaiour.accept(self.productviewmodel.FetchDataFormRealm())
             nextVc.modalPresentationStyle = .fullScreen
+            nextVc.delegate = self
             self.present(nextVc, animated: true)
             
         }).disposed(by: disposebag)

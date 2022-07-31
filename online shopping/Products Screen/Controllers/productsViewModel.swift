@@ -136,4 +136,12 @@ class productsViewModel {
         
         productsBehaviour.accept(products)
     }
+    
+    func FetchTheNotificationFormUser() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("DeleteItem"), object: nil)
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        fetchDataOperation()
+    }
 }
