@@ -23,6 +23,9 @@ class productsViewModel {
     
     var numberofProductBehaviour = BehaviorRelay<Int>(value: 0)
     
+    var selectedProductBehaviour = BehaviorRelay<Int>(value: 0)
+    var savedResponseBehacviour = BehaviorRelay<String>(value: "")
+    
     private func ConvertToArray<T: GraphQLSelectionSet>(data: [T]) {
         var arr = Array<productModel>()
         
@@ -135,6 +138,20 @@ class productsViewModel {
         products[index].inCart = true
         
         productsBehaviour.accept(products)
+    }
+    
+    func SaveDataToCart(index: Int) {
+        let uuid = UUID().uuidString
+        
+        selectedProductBehaviour.accept(index)
+        
+        let products = productsBehaviour.value
+        
+        let productData = cartModel(id: uuid, productId: products[index].id, pickedSize: nil, pickedColor: nil)
+        
+        let response = RealmSwiftLayer.Save(productData)
+        
+        savedResponseBehacviour.accept(response)
     }
     
     func FetchTheNotificationFormUser() {

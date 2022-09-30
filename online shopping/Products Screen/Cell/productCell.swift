@@ -7,6 +7,8 @@
 
 import UIKit
 import Kingfisher
+import RxCocoa
+import RxSwift
 
 class productCell: UICollectionViewCell {
     
@@ -17,6 +19,10 @@ class productCell: UICollectionViewCell {
     @IBOutlet weak var outOfStockView: UIView!
     
     @IBOutlet weak var cartButton: UIButton!
+    
+    var AddButtonObserval : Observable<Void>{
+           return self.cartButton.rx.tap.throttle(.milliseconds(1000), scheduler: MainScheduler.instance).asObservable()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

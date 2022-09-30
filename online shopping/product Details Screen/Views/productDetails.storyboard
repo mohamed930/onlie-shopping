@@ -191,7 +191,7 @@
                                                     <constraint firstItem="6fA-3q-Q3O" firstAttribute="top" secondItem="Dp5-oF-mKX" secondAttribute="top" constant="7" id="ntf-Ru-ylN"/>
                                                 </constraints>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAH-eT-NrN">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAH-eT-NrN">
                                                 <rect key="frame" x="12" y="981" width="343" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9o1-S6-wiQ">

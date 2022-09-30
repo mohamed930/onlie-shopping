@@ -42,6 +42,7 @@ class ProductsViewController: UIViewController, representToHomeScreen , Countdat
         
         
         AddTapGeuseterToFilter()
+        SusbcribeToSavedResponse()
         ConfigureCollectionView()
         BindToCollectionView()
         SubscribeToCollectionViewScelection()
@@ -97,6 +98,24 @@ class ProductsViewController: UIViewController, representToHomeScreen , Countdat
         }
     }
     
+    func SusbcribeToSavedResponse() {
+        productviewmodel.savedResponseBehacviour.subscribe(onNext: { [weak self] response in
+            if response == "Success" {
+                let index = self?.productviewmodel.selectedProductBehaviour.value
+                
+                self?.productviewmodel.updateInCart(index: index!)
+                
+                let oldNumber = self?.productviewmodel.numberofProductBehaviour.value
+                let newNumber = oldNumber!
+                
+                self?.productviewmodel.numberofProductBehaviour.accept(newNumber)
+            }
+            else {
+                print("Error in Saving \(response)")
+            }
+        }).disposed(by: disposebag)
+    }
+    
     func ConfigureCollectionView() {
         collectionView.register(UINib(nibName: CellnibName, bundle: nil), forCellWithReuseIdentifier: CellIdentifier)
         
@@ -127,6 +146,11 @@ class ProductsViewController: UIViewController, representToHomeScreen , Countdat
     func BindToCollectionView() {
         productviewmodel.productsBehaviourObserval.bind(to: collectionView.rx.items(cellIdentifier: CellIdentifier, cellType: productCell.self)) { row, branch , cell in
             cell.configureCell(product: branch)
+            
+            cell.AddButtonObserval.subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.productviewmodel.SaveDataToCart(index: row)
+            }).disposed(by: self.disposebag)
         }.disposed(by: disposebag)
     }
     

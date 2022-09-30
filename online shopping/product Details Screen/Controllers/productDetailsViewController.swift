@@ -198,7 +198,13 @@ class productDetailsViewController: UIViewController {
                 }
             }
             else {
-                self.AddCartButton.isHidden = true
+                self.AddCartButton.isHidden = false
+                self.countView.isHidden = true
+                
+                self.countView.isHidden = true
+                self.AddCartButton.isEnabled = false
+                self.AddCartButton.layer.backgroundColor = UIColor().hexStringToUIColor(hex: "#D9D9D9").cgColor
+                self.AddCartButton.setTitleColor(UIColor.black, for: .normal)
             }
             
             
