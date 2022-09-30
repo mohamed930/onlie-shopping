@@ -26,6 +26,8 @@ class cartViewModel {
     
     var watcher: GraphQLQueryWatcher<ProductDetailsViewQuery>?
     
+    var confirmationBehaviour = BehaviorRelay<Bool?>(value: nil)
+    
     
     func FetchDataOperation() {
         var productsCart = Array<productcartModel>()
@@ -238,4 +240,11 @@ class cartViewModel {
         productsCarBehvaiour.accept(sections)
     }
     // ------------------------------------------------
+    
+    
+    func RemoveAllproducts() {
+        let response = RealmSwiftLayer.deleteAll()
+        
+        confirmationBehaviour.accept(response)
+    }
 }

@@ -15,4 +15,6 @@ target 'online shopping' do
   pod 'Kingfisher'
   
   pod 'Apollo'
+  
+  pod 'lottie-ios'
 end

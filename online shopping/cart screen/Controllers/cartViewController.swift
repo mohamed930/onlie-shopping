@@ -40,6 +40,8 @@ class cartViewController: UIViewController {
         SubscrbieToResponse()
         FetchProduct()
         SubscribeToBackButtonAction()
+        SubscribeToDeleteResponse()
+        SubscribeToConfirmOrderButtonAction()
     }
     
     func ConfiguretableView() {
@@ -104,6 +106,32 @@ class cartViewController: UIViewController {
             }
             
             self.dismiss(animated: true)
+        }).disposed(by: dispossebag)
+    }
+    
+    func SubscribeToDeleteResponse() {
+        cartviewmodel.confirmationBehaviour.subscribe(onNext: { [weak self] response in
+            guard let self = self else { return }
+            guard let response = response else { return }
+            
+            if response {
+                let story = UIStoryboard(name: "finish", bundle: nil)
+                let nextVc = story.instantiateViewController(withIdentifier: "finishViewController") as! finishViewController
+                nextVc.modalPresentationStyle = .fullScreen
+                
+                self.present(nextVc, animated: true)
+            }
+            else {
+                print("Error")
+            }
+        }).disposed(by: dispossebag)
+    }
+    
+    func SubscribeToConfirmOrderButtonAction() {
+        OrderButton.rx.tap.throttle(.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.cartviewmodel.RemoveAllproducts()
         }).disposed(by: dispossebag)
     }
     

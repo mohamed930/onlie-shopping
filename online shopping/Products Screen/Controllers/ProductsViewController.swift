@@ -106,7 +106,7 @@ class ProductsViewController: UIViewController, representToHomeScreen , Countdat
                 self?.productviewmodel.updateInCart(index: index!)
                 
                 let oldNumber = self?.productviewmodel.numberofProductBehaviour.value
-                let newNumber = oldNumber!
+                let newNumber = oldNumber! + 1
                 
                 self?.productviewmodel.numberofProductBehaviour.accept(newNumber)
             }

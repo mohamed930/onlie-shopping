@@ -58,4 +58,17 @@ class RealmSwiftLayer {
         }
         return false
     }
+    
+    public static func deleteAll() -> Bool {
+        
+        do {
+            try realm.write {
+                realm.deleteAll()
+            }
+            return true
+        } catch let error {
+            print("Databse flush failed with ", error)
+        }
+        return false
+    }
 }
